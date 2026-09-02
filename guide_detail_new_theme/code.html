@@ -1,467 +1,432 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Guide - guidea2z</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="../css/theme.css">
-<script src="../js/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../js/supabaseClient.js"></script>
-<script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-                "primary-fixed-dim": "#ffb4a2",
-                "surface": "#fff8f6",
-                "tertiary": "#4e616e",
-                "on-background": "#221a17",
-                "surface-container-high": "#f6e4e0",
-                "on-surface": "#221a17",
-                "secondary-fixed-dim": "#aacfbb",
-                "surface-container-lowest": "#ffffff",
-                "secondary-container": "#c3e8d4",
-                "primary": "#994530",
-                "secondary": "#446555",
-                "error": "#ba1a1a",
-                "on-tertiary": "#ffffff",
-                "surface-tint": "#994530",
-                "on-primary-fixed": "#3c0700",
-                "on-secondary-fixed-variant": "#2c4d3e",
-                "tertiary-fixed-dim": "#b6c9d9",
-                "inverse-surface": "#382e2c",
-                "background": "#fff8f6",
-                "inverse-primary": "#ffb4a2",
-                "tertiary-fixed": "#d2e5f5",
-                "on-secondary": "#ffffff",
-                "on-tertiary-container": "#2c3e4b",
-                "on-secondary-fixed": "#002115",
-                "inverse-on-surface": "#ffede9",
-                "on-tertiary-fixed-variant": "#374956",
-                "outline-variant": "#dbc1bb",
-                "surface-container-highest": "#f0dfdb",
-                "surface-bright": "#fff8f6",
-                "primary-container": "#f28b71",
-                "surface-container": "#fceae6",
-                "surface-container-low": "#fff1ed",
-                "on-error-container": "#93000a",
-                "secondary-fixed": "#c6ebd6",
-                "primary-fixed": "#ffdad2",
-                "surface-variant": "#f0dfdb",
-                "outline": "#88726d",
-                "error-container": "#ffdad6",
-                "on-tertiary-fixed": "#0a1d29",
-                "surface-dim": "#e7d6d2",
-                "on-primary-fixed-variant": "#7a2f1b",
-                "on-primary-container": "#6c2412",
-                "on-surface-variant": "#55433e",
-                "on-primary": "#ffffff",
-                "on-error": "#ffffff",
-                "on-secondary-container": "#486a59",
-                "tertiary-container": "#96a9b8"
-        },
-        "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-        },
-        "spacing": {
-                "md": "24px",
-                "base": "8px",
-                "gutter": "24px",
-                "sm": "12px",
-                "margin-desktop": "64px",
-                "margin-mobile": "16px",
-                "xl": "80px",
-                "lg": "48px",
-                "xs": "4px"
-        },
-        "fontFamily": {
-                "display-lg": [
-                        "Hanken Grotesk"
-                ],
-                "headline-md": [
-                        "Hanken Grotesk"
-                ],
-                "headline-lg": [
-                        "Hanken Grotesk"
-                ],
-                "body-lg": [
-                        "Hanken Grotesk"
-                ],
-                "label-md": [
-                        "Hanken Grotesk"
-                ],
-                "label-sm": [
-                        "Hanken Grotesk"
-                ],
-                "headline-lg-mobile": [
-                        "Hanken Grotesk"
-                ],
-                "body-md": [
-                        "Hanken Grotesk"
-                ]
-        },
-        "fontSize": {
-                "display-lg": [
-                        "48px",
-                        {
-                                "lineHeight": "56px",
-                                "letterSpacing": "-0.02em",
-                                "fontWeight": "800"
-                        }
-                ],
-                "headline-md": [
-                        "24px",
-                        {
-                                "lineHeight": "32px",
-                                "fontWeight": "600"
-                        }
-                ],
-                "headline-lg": [
-                        "32px",
-                        {
-                                "lineHeight": "40px",
-                                "letterSpacing": "-0.01em",
-                                "fontWeight": "700"
-                        }
-                ],
-                "body-lg": [
-                        "18px",
-                        {
-                                "lineHeight": "28px",
-                                "fontWeight": "400"
-                        }
-                ],
-                "label-md": [
-                        "14px",
-                        {
-                                "lineHeight": "20px",
-                                "letterSpacing": "0.01em",
-                                "fontWeight": "600"
-                        }
-                ],
-                "label-sm": [
-                        "12px",
-                        {
-                                "lineHeight": "16px",
-                                "letterSpacing": "0.02em",
-                                "fontWeight": "500"
-                        }
-                ],
-                "headline-lg-mobile": [
-                        "28px",
-                        {
-                                "lineHeight": "36px",
-                                "fontWeight": "700"
-                        }
-                ],
-                "body-md": [
-                        "16px",
-                        {
-                                "lineHeight": "24px",
-                                "fontWeight": "400"
-                        }
-                ]
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Guide Detail - guidea2z</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <script src="../js/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabaseClient.js"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#994530",
+            "primary-container": "#f28b71",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#6c2412",
+            "secondary": "#446555",
+            "secondary-container": "#c3e8d4",
+            "surface": "#fff8f6",
+            "surface-container": "#fceae6",
+            "surface-container-low": "#fff1ed",
+            "surface-container-high": "#f6e4e0",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#221a17",
+            "on-surface-variant": "#55433e",
+            "outline": "#88726d",
+            "outline-variant": "#dbc1bb",
+            "background": "#fff8f6"
+          },
+          fontFamily: {
+            sans: ["Hanken Grotesk", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
         }
-},
-    },
-  }
-</script>
-<style>
-        .material-symbols-outlined {
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 16px);
     }
   </style>
 </head>
-<body class="bg-surface text-on-surface font-body-md antialiased pb-[90px] md:pb-0 pt-[80px]">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 border-b border-outline-variant/30 shadow-sm">
-<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-screen-xl mx-auto">
-<div class="flex items-center gap-3">
-<button id="back-btn" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
-<span class="material-symbols-outlined text-primary">arrow_back</span>
-</button>
-<a href="../home_feed_new_theme/code.html" class="flex items-center gap-2">
-  <img src="../sign_up/logo.png" class="w-7 h-7 object-contain" alt="guidea2z logo">
-  <span class="font-headline-md text-headline-md font-bold text-primary">guidea2z</span>
-</a>
-</div>
-<div class="flex items-center gap-1.5">
-<button type="button" class="theme-toggle-btn flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200 text-on-surface-variant" title="Toggle Dark/Light Mode">
-  <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
-</button>
-<a href="../browse_new_theme/code.html" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
-<span class="material-symbols-outlined text-primary">search</span>
-</a>
-<a id="profile-btn" href="../account_settings/code.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container active:scale-95 duration-200 shadow-sm font-bold text-sm">
-<span id="header-avatar-initial" class="font-body-lg text-body-lg font-semibold">G</span>
-</a>
-</div>
-</div>
-</header>
-<main class="max-w-screen-md mx-auto px-margin-mobile md:px-0">
-<!-- Guide Header -->
-<article class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30 mt-md mb-md">
-<div class="flex justify-between items-start mb-sm">
-<div>
-<span id="guide-category-tag" class="inline-block px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm mb-xs uppercase tracking-wider">#computer_science</span>
-<h1 id="guide-title" class="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-xs">Semester 1 Survival Guide</h1>
-</div>
-<button id="bookmark-btn" class="flex items-center justify-center w-11 h-11 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200 border border-outline-variant text-secondary">
-<span id="bookmark-icon" class="material-symbols-outlined">bookmark</span>
-</button>
-</div>
-<div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant/30">
-<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary/20 bg-secondary-container flex items-center justify-center font-bold text-primary text-lg">
-  <span id="author-avatar-initial">A</span>
-</div>
-<div>
-<div id="author-name" class="font-body-lg text-body-lg font-semibold text-on-surface">Alex Chen</div>
-<div id="guide-meta" class="font-label-sm text-label-sm text-on-surface-variant">Senior CS Major • Campus Guide</div>
-</div>
-</div>
-<!-- Guide Content -->
-<div id="guide-content-area" class="prose prose-slate max-w-none text-on-surface font-body-md text-body-md leading-relaxed space-y-sm">
-  <div class="text-center py-6 text-on-surface-variant">
-    <span class="material-symbols-outlined text-3xl text-primary animate-spin">refresh</span>
-    <p class="mt-2">Loading guide content...</p>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-sans antialiased selection:bg-primary-container selection:text-on-primary-container pb-24 md:pb-12">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-xs">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3">
+        <button id="back-btn" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container active:scale-95 transition-all text-on-surface">
+          <span class="material-symbols-outlined text-xl">arrow_back</span>
+        </button>
+        <a href="../index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center font-extrabold text-sm shadow-xs">g</div>
+          <span class="font-extrabold text-lg text-primary tracking-tight">guidea2z</span>
+        </a>
+      </div>
+
+      <!-- Action Buttons (Bookmark, Share, Theme) -->
+      <div class="flex items-center gap-2">
+        <button id="bookmark-btn" class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary active:scale-95 transition-all shadow-2xs" title="Save Guide">
+          <span id="bookmark-icon" class="material-symbols-outlined text-xl">bookmark</span>
+        </button>
+        <button id="share-btn" class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary active:scale-95 transition-all shadow-2xs" title="Share Guide">
+          <span class="material-symbols-outlined text-xl">share</span>
+        </button>
+        <button type="button" class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+          <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 flex-1 w-full space-y-6">
+    
+    <!-- Guide Article Card -->
+    <article class="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 border border-outline-variant/30 shadow-xs space-y-6">
+      
+      <!-- Top Meta Tags & Likes -->
+      <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-outline-variant/20">
+        <div class="flex items-center gap-2">
+          <span id="guide-category-tag" class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider">
+            #loading
+          </span>
+          <span id="guide-location-tag" class="text-xs text-outline font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">location_on</span>
+            <span id="guide-location">Campus</span>
+          </span>
+        </div>
+
+        <!-- Like Button -->
+        <button id="like-btn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs active:scale-95 transition-all shadow-2xs">
+          <span id="like-icon" class="material-symbols-outlined text-rose-500 text-base">favorite</span>
+          <span id="likes-count">0</span>
+        </button>
+      </div>
+
+      <!-- Title -->
+      <h1 id="guide-title" class="text-2xl sm:text-4xl font-extrabold text-on-surface tracking-tight leading-tight">
+        Loading Guide...
+      </h1>
+
+      <!-- Author Bio Row -->
+      <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-2xl border border-outline-variant/20">
+        <div id="author-avatar-initial" class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-2xs">
+          A
+        </div>
+        <div>
+          <div id="author-name" class="font-bold text-sm text-on-surface">Community Member</div>
+          <div id="guide-meta" class="text-xs text-outline">Verified Campus Guide</div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div id="guide-summary-box" class="p-4 bg-primary/5 border-l-4 border-primary rounded-r-2xl text-xs sm:text-sm text-on-surface leading-relaxed font-medium">
+        Loading summary...
+      </div>
+
+      <!-- Step-by-Step Sections -->
+      <div class="space-y-4">
+        <h2 class="text-lg font-extrabold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">checklist</span>
+          Actionable Guide Steps
+        </h2>
+        <div id="guide-steps-container" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Discussion / Comments Section -->
+    <section class="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 border border-outline-variant/30 shadow-xs space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-extrabold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary">forum</span>
+          Student Discussion (<span id="comments-count">0</span>)
+        </h2>
+      </div>
+
+      <!-- Comment Box -->
+      <form id="comment-form" class="space-y-3">
+        <textarea 
+          id="comment-text" 
+          rows="3" 
+          placeholder="Ask a question, share a tip, or thank the author..." 
+          class="w-full p-3.5 bg-surface-container-low border border-outline-variant/60 rounded-2xl text-xs sm:text-sm text-on-surface placeholder:text-outline/70 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+          required
+        ></textarea>
+        <div class="flex justify-end">
+          <button type="submit" class="px-5 py-2.5 bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container rounded-full text-xs font-bold shadow-xs active:scale-95 transition-all flex items-center gap-1.5">
+            <span>Post Comment</span>
+            <span class="material-symbols-outlined text-sm font-bold">send</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Comments List -->
+      <div id="comments-list" class="space-y-3 pt-2">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-full shadow-xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+    Link copied to clipboard!
   </div>
-</div>
-</article>
-<!-- Comments Section — hidden until backend is wired up -->
-<section class="mt-lg mb-lg hidden" id="comments-section">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">forum</span> Discussion
-</h2>
-<div class="bg-surface-container-lowest rounded-xl p-sm shadow-sm border border-outline-variant/30 mb-md">
-<div class="flex gap-sm">
-<div class="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-primary-container text-on-primary-container font-body-lg text-body-lg font-semibold">
-  G
-</div>
-<div class="flex-grow">
-<textarea id="comment-input" class="w-full border border-outline-variant/50 rounded-lg p-3 bg-surface text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors font-body-md text-body-md resize-none" placeholder="Ask a question or share a thought..." rows="2"></textarea>
-<div class="flex justify-end mt-xs">
-<button id="post-comment-btn" class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-surface-tint transition-colors active:scale-95 duration-200">Post Comment</button>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
 
-<script>
-  // Fallback guides from Browse — used to render preview when ID is not a UUID
-  const FALLBACK_GUIDES = {
-    'cse-1': { title: 'Data Structures & Algorithms in Java', category: 'CSE', author_name: 'Swapna Kumari', summary: 'Complete roadmap for cracking college lab exams, tree traversals, graphs, and dynamic programming.', steps: ['Master Recursion & Pointer manipulation', 'Practice Sorting & Binary Search', 'Solve LeetCode Top 50'] },
-    'csm-1': { title: 'Machine Learning & Neural Networks 101', category: 'CSM', author_name: 'Rahul Sharma', summary: 'Hands-on guide to PyTorch, TensorFlow, Gradient Descent, and building your first CNN image classifier.', steps: ['Install Python & Anaconda Environment', 'Understand Forward & Backward Propagation', 'Deploy on HuggingFace'] },
-    'csd-1': { title: 'Data Science & Big Data Analytics', category: 'CSD', author_name: 'Priya Patel', summary: 'End-to-end data pipelines using Pandas, NumPy, SQL, and PowerBI visualization templates.', steps: ['Clean missing data with Pandas', 'Build interactive dashboards', 'Run exploratory analysis'] },
-    'csc-1': { title: 'Network Security & Ethical Hacking Labs', category: 'CSC', author_name: 'Vikram Rao', summary: 'Guide to Wireshark packet analysis, cryptography ciphers, and securing Linux servers.', steps: ['Setup Kali Linux VM', 'Capture packets in Wireshark', 'Implement RSA & AES Encryption'] },
-    'csbs-1': { title: 'Business Systems & Agile Software Delivery', category: 'CSBS', author_name: 'Sneha Roy', summary: 'How to combine software development with financial modeling and enterprise ERP systems.', steps: ['Design ER Diagrams for Enterprise', 'Manage Jira Agile Sprints', 'Financial Tech Integration'] },
-    'it-1': { title: 'Full Stack Web Architecture & Cloud DevOps', category: 'IT', author_name: 'Aditya Kumar', summary: 'Building RESTful APIs with Node.js, Express, Docker containers, and AWS S3 storage.', steps: ['Create Modular Express Routes', 'Containerize with Docker', 'Deploy to Cloud Hosting'] },
-    'ece-1': { title: 'VLSI Design & Digital Signal Processing', category: 'ECE', author_name: 'Ananya Reddy', summary: 'Verilog HDL coding tips, MATLAB signal filters, and microcontroller circuit design.', steps: ['Write Verilog Testbenches', 'Design Butterworth Lowpass Filters', 'Simulate in Modelsim'] },
-    'eee-1': { title: 'Power Systems & Electrical Machines Guide', category: 'EEE', author_name: 'Karthik Nair', summary: 'Detailed lab notes on transformers, induction motors, power grid stability, and MATLAB Simulink.', steps: ['Understand Transformer Equivalent Circuits', 'Simulate Power Factor Correction', 'Calculate Motor Efficiency'] },
-    'mech-1': { title: 'Thermodynamics & AutoCAD Engineering Drawing', category: 'Mechanical', author_name: 'Rohan Gupta', summary: 'Carnot cycle equations, 3D modeling in SolidWorks, and IC engine test procedures.', steps: ['Learn Isometric Projections in AutoCAD', 'Calculate Enthalpy & Entropy', 'Perform Stress Analysis'] },
-    'civil-1': { title: 'Structural Analysis & Concrete Technology', category: 'Civil', author_name: 'Meera Menon', summary: 'Shear force & bending moment diagrams, surveying with Total Station, and mix design.', steps: ['Draw SFD and BMD for Beams', 'Conduct Slump Cone Test for Concrete', 'Plan Leveling in Total Station'] },
-    'chem-1': { title: 'Chemical Reaction Engineering & Heat Transfer', category: 'Chemical', author_name: 'Arjun Das', summary: 'Design of CSTR and PFR reactors, distillation column mass transfer, and thermodynamics.', steps: ['Balance Heat Exchanger Equations', 'Calculate Reactor Residence Time', 'Execute Lab Titration'] },
-    'other-1': { title: 'Campus Placement Prep & Resume Blueprint', category: 'Others', author_name: 'guidea2z Team', summary: 'A to Z blueprint on aptitude tests, technical interview rounds, and building an ATS-proof resume.', steps: ['Format Clean Single-Page Resume', 'Solve Quantitative Aptitude Daily', 'Ace HR Behavioral Questions'] }
-  };
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-outline-variant/30 shadow-lg pb-safe">
+    <div class="flex justify-around items-center h-16 px-2">
+      <a href="../index.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all w-16">
+        <span class="material-symbols-outlined text-2xl">home</span>
+        <span class="text-[10px] mt-0.5">Home</span>
+      </a>
+      <a href="../browse_new_theme/code.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all w-16">
+        <span class="material-symbols-outlined text-2xl">explore</span>
+        <span class="text-[10px] mt-0.5">Browse</span>
+      </a>
+      <a href="../post_guide_new_theme/code.html" class="flex flex-col items-center justify-center -translate-y-2 group">
+        <div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg group-active:scale-90 transition-transform">
+          <span class="material-symbols-outlined text-2xl font-bold">add</span>
+        </div>
+        <span class="text-[10px] font-bold text-primary mt-1">Post</span>
+      </a>
+      <a href="../saved_guides/code.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all w-16">
+        <span class="material-symbols-outlined text-2xl">bookmark</span>
+        <span class="text-[10px] mt-0.5">Saved</span>
+      </a>
+      <a href="../account_settings/code.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all w-16">
+        <span class="material-symbols-outlined text-2xl">person</span>
+        <span class="text-[10px] mt-0.5">Profile</span>
+      </a>
+    </div>
+  </nav>
 
-  // UUID format check
-  function isUUID(str) {
-    return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
-  }
+  <script>
+    let currentGuide = null;
+    let comments = [];
+    let isLiked = false;
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    // Back button
-    document.getElementById('back-btn')?.addEventListener('click', () => {
-      if (document.referrer) {
-        window.history.back();
-      } else {
-        window.location.href = '../home_feed_new_theme/code.html';
-      }
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Back button handler
+      document.getElementById('back-btn').addEventListener('click', () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = '../index.html';
+        }
+      });
+
+      // Share button handler
+      document.getElementById('share-btn').addEventListener('click', () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(window.location.href);
+          showToast('Guide link copied to clipboard! 📋');
+        }
+      });
+
+      // Load Guide
+      const urlParams = new URLSearchParams(window.location.search);
+      const guideId = urlParams.get('id') || 'starter-1';
+      await loadGuideDetail(guideId);
+
+      // Setup Comment Form
+      document.getElementById('comment-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('comment-text');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const profile = JSON.parse(localStorage.getItem('guidea2z_profile') || '{}');
+        const authorName = profile.name || 'Student';
+
+        const newComment = {
+          id: 'c-' + Date.now(),
+          author: authorName,
+          text: text,
+          time: 'Just now'
+        };
+
+        comments.unshift(newComment);
+        input.value = '';
+        saveAndRenderComments(guideId);
+        showToast('Comment posted! 💬');
+      });
     });
 
-    // Load profile avatar initial from localStorage
-    try {
-      const saved = localStorage.getItem('guidea2z_profile');
-      if (saved) {
-        const p = JSON.parse(saved);
-        if (p.name) document.getElementById('header-avatar-initial').textContent = p.name.charAt(0).toUpperCase();
+    async function loadGuideDetail(guideId) {
+      if (window.Guidea2zSupabase) {
+        currentGuide = await window.Guidea2zSupabase.db.fetchGuideById(guideId);
       }
-    } catch(e) {}
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const guideId = urlParams.get('id') || 'starter-1';
+      if (!currentGuide) {
+        // Search in starters
+        const starters = window.Guidea2zSupabase?.STARTER_GUIDES || [];
+        currentGuide = starters.find(g => String(g.id) === String(guideId)) || starters[0];
+      }
 
-    let activeGuide = null;
-
-    if (window.Guidea2zSupabase) {
-      try {
-        activeGuide = await window.Guidea2zSupabase.db.fetchGuideById(guideId);
-      } catch (err) {
-        console.warn('Error querying guide:', err);
+      if (currentGuide) {
+        renderGuideUI(currentGuide);
+        initLikeAndBookmark(currentGuide.id);
+        loadComments(currentGuide.id);
       }
     }
 
-    if (!activeGuide && FALLBACK_GUIDES[guideId]) {
-      const fb = FALLBACK_GUIDES[guideId];
-      activeGuide = {
-        id: guideId,
-        title: fb.title,
-        category: fb.category,
-        author_name: fb.author_name,
-        summary: fb.summary,
-        steps: fb.steps,
-        created_at: new Date().toISOString()
-      };
+    function renderGuideUI(guide) {
+      document.title = `${guide.title} - guidea2z`;
+      document.getElementById('guide-title').textContent = guide.title;
+      document.getElementById('guide-category-tag').textContent = `#${(guide.category || 'General').toLowerCase()}`;
+      document.getElementById('guide-location').textContent = guide.location || 'Main Campus';
+      
+      const author = guide.author_name || 'Community Member';
+      document.getElementById('author-name').textContent = author;
+      document.getElementById('author-avatar-initial').textContent = author.charAt(0).toUpperCase();
+
+      document.getElementById('guide-summary-box').textContent = guide.summary || 'Follow the step-by-step points below.';
+
+      // Steps
+      const stepsContainer = document.getElementById('guide-steps-container');
+      const steps = Array.isArray(guide.steps) && guide.steps.length > 0 ? guide.steps : [
+        'Review the key concepts and lecture slides.',
+        'Solve previous year questions and practice numericals.',
+        'Summarize formulas and revise with study group.'
+      ];
+
+      stepsContainer.innerHTML = steps.map((step, idx) => `
+        <div class="p-4 bg-surface-container-low rounded-2xl border border-outline-variant/30 flex items-start gap-3.5">
+          <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-2xs">
+            ${idx + 1}
+          </div>
+          <div class="text-xs sm:text-sm text-on-surface leading-relaxed font-medium">
+            ${escapeHtml(step)}
+          </div>
+        </div>
+      `).join('');
     }
 
-    if (activeGuide) {
-      renderGuide(activeGuide, true);
-    } else {
-      renderNotFound();
-      return;
-    }
+    async function initLikeAndBookmark(guideId) {
+      const likeBtn = document.getElementById('like-btn');
+      const likeIcon = document.getElementById('like-icon');
+      const likesCountSpan = document.getElementById('likes-count');
+      let count = currentGuide?.likes_count || 18;
+      likesCountSpan.textContent = count;
 
-    // ── Bookmark Toggle ──
-    const bookmarkBtn = document.getElementById('bookmark-btn');
-    const bookmarkIcon = document.getElementById('bookmark-icon');
-    
-    // Check initial saved status
-    if (window.Guidea2zSupabase && activeGuide) {
+      likeBtn.addEventListener('click', () => {
+        isLiked = !isLiked;
+        if (isLiked) {
+          likeIcon.classList.add('fill');
+          count += 1;
+          showToast('Liked guide! ❤️');
+        } else {
+          likeIcon.classList.remove('fill');
+          count -= 1;
+        }
+        likesCountSpan.textContent = count;
+      });
+
+      // Bookmark
+      const bookmarkBtn = document.getElementById('bookmark-btn');
+      const bookmarkIcon = document.getElementById('bookmark-icon');
+
       try {
         const savedGuides = await window.Guidea2zSupabase.db.fetchSavedGuides();
-        const alreadySaved = savedGuides.some(g => String(g.id) === String(activeGuide.id));
-        if (alreadySaved && bookmarkIcon && bookmarkBtn) {
-          bookmarkIcon.style.fontVariationSettings = "'FILL' 1";
-          bookmarkBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+        const isSaved = savedGuides.some(g => String(g.id) === String(guideId));
+        if (isSaved) {
+          bookmarkIcon.classList.add('fill');
+          bookmarkIcon.classList.add('text-primary');
         }
       } catch (e) {}
-    }
 
-    if (bookmarkBtn && activeGuide) {
       bookmarkBtn.addEventListener('click', async () => {
         try {
-          if (!window.Guidea2zSupabase) return;
-          const isSaved = await window.Guidea2zSupabase.db.toggleSaveGuide(activeGuide.id);
-          if (isSaved) {
-            bookmarkIcon.style.fontVariationSettings = "'FILL' 1";
-            bookmarkBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+          const savedNow = await window.Guidea2zSupabase.db.toggleSaveGuide(guideId);
+          if (savedNow) {
+            bookmarkIcon.classList.add('fill');
+            bookmarkIcon.classList.add('text-primary');
+            showToast('Saved to your bookmarks! 🔖');
           } else {
-            bookmarkIcon.style.fontVariationSettings = "'FILL' 0";
-            bookmarkBtn.classList.remove('bg-primary-container', 'text-on-primary-container');
+            bookmarkIcon.classList.remove('fill');
+            bookmarkIcon.classList.remove('text-primary');
+            showToast('Removed from bookmarks');
           }
-        } catch (err) {
-          console.warn('Save notice:', err);
+        } catch (e) {
+          showToast('Bookmark updated');
         }
       });
     }
-  });
 
-  function renderGuide(guide, isSaveable) {
-    document.title = `${guide.title} - guidea2z`;
-    document.getElementById('guide-category-tag').textContent = `#${(guide.category || 'General').toLowerCase().replace(/\s+/g, '_')}`;
-    document.getElementById('guide-title').textContent = guide.title;
-    const author = guide.author_name || 'Community Member';
-    document.getElementById('author-name').textContent = author;
-    document.getElementById('author-avatar-initial').textContent = author.charAt(0).toUpperCase();
-    document.getElementById('guide-meta').textContent = `${guide.category || 'General'} • Campus Guide`;
-
-    // Hide bookmark button for fallback (non-saveable) guides
-    if (!isSaveable) {
-      const btn = document.getElementById('bookmark-btn');
-      if (btn) btn.classList.add('hidden');
-    }
-
-    const contentArea = document.getElementById('guide-content-area');
-    if (contentArea) {
-      const summaryHtml = guide.summary
-        ? `<p class="text-body-lg font-medium text-on-surface mb-4 leading-relaxed border-l-4 border-primary/30 pl-4 italic">${escapeHtml(guide.summary)}</p>`
-        : '';
-      let stepsHtml = '';
-      if (Array.isArray(guide.steps) && guide.steps.length > 0) {
-        stepsHtml = guide.steps.map((step, idx) => `
-          <div class="bg-surface-container-low rounded-xl p-5 my-4 border border-outline-variant/30 shadow-sm">
-            <h4 class="font-headline-md text-primary mb-2 font-bold flex items-center gap-2">
-              <span class="w-7 h-7 rounded-full bg-primary text-on-primary text-xs font-bold flex items-center justify-center shrink-0">${idx + 1}</span>
-              Step ${idx + 1}
-            </h4>
-            <p class="font-body-md text-on-surface whitespace-pre-wrap leading-relaxed">${escapeHtml(step)}</p>
-          </div>
-        `).join('');
+    function loadComments(guideId) {
+      const stored = localStorage.getItem(`guidea2z_comments_${guideId}`);
+      if (stored) {
+        comments = JSON.parse(stored);
+      } else {
+        // Starter comments for realistic demonstration
+        comments = [
+          { id: 'c1', author: 'Pooja Nair', text: 'This was super helpful for our semester revision, thanks for sharing!', time: '2 hours ago' },
+          { id: 'c2', author: 'Dev Sharma', text: 'Step 2 solved the exact issue I was facing in the lab test.', time: 'Yesterday' }
+        ];
       }
-      contentArea.innerHTML = summaryHtml + stepsHtml || '<p class="text-on-surface-variant">No content available for this guide yet.</p>';
+      renderComments();
     }
-  }
 
-  function renderNotFound() {
-    document.title = 'Guide Not Found - guidea2z';
-    const main = document.querySelector('main');
-    if (!main) return;
-    main.innerHTML = `
-      <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-16">
-        <div class="w-20 h-20 rounded-full bg-surface-container-low text-primary flex items-center justify-center mb-4 shadow-inner">
-          <span class="material-symbols-outlined text-4xl">search_off</span>
+    function saveAndRenderComments(guideId) {
+      localStorage.setItem(`guidea2z_comments_${guideId}`, JSON.stringify(comments));
+      renderComments();
+    }
+
+    function renderComments() {
+      const list = document.getElementById('comments-list');
+      const count = document.getElementById('comments-count');
+      count.textContent = comments.length;
+
+      if (comments.length === 0) {
+        list.innerHTML = `<p class="text-xs text-outline py-2">No comments yet. Be the first to share your feedback!</p>`;
+        return;
+      }
+
+      list.innerHTML = comments.map(c => `
+        <div class="p-3.5 bg-surface-container-low rounded-2xl border border-outline-variant/20 flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs shrink-0">
+            ${escapeHtml(c.author.charAt(0))}
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-on-surface">${escapeHtml(c.author)}</span>
+              <span class="text-[10px] text-outline font-semibold">${escapeHtml(c.time)}</span>
+            </div>
+            <p class="text-xs text-on-surface-variant leading-relaxed">${escapeHtml(c.text)}</p>
+          </div>
         </div>
-        <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold mb-2">Guide Not Found</h2>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-6">This guide may have been removed or the link is incorrect.</p>
-        <div class="flex items-center gap-3 flex-wrap justify-center">
-          <a href="../browse_new_theme/code.html" class="px-6 py-3 bg-primary text-on-primary font-semibold text-sm rounded-full shadow-md hover:bg-surface-tint transition-all inline-flex items-center gap-2">
-            <span class="material-symbols-outlined text-base">explore</span>
-            Browse All Guides
-          </a>
-          <a href="../home_feed_new_theme/code.html" class="px-6 py-3 bg-surface-container-high text-on-surface font-semibold text-sm rounded-full hover:bg-surface-container-highest transition-all inline-flex items-center gap-2">
-            <span class="material-symbols-outlined text-base">home</span>
-            Go Home
-          </a>
-        </div>
-      </div>
-    `;
-  }
+      `).join('');
+    }
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>"']/g, function(m) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-    });
-  }
-</script>
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
 
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface shadow-lg border-t border-outline-variant/30">
-<div class="flex justify-around items-center px-4 py-2 pb-safe">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../home_feed_new_theme/code.html">
-  <span class="material-symbols-outlined">home</span>
-  <span class="font-label-sm text-label-sm mt-1">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../browse_new_theme/code.html">
-  <span class="material-symbols-outlined">explore</span>
-  <span class="font-label-sm text-label-sm mt-1">Browse</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../post_guide_new_theme/code.html">
-  <span class="material-symbols-outlined">add_circle</span>
-  <span class="font-label-sm text-label-sm mt-1">Post</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../saved_guides/code.html">
-  <span class="material-symbols-outlined">bookmark</span>
-  <span class="font-label-sm text-label-sm mt-1">Saved</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../account_settings/code.html">
-  <span class="material-symbols-outlined">person</span>
-  <span class="font-label-sm text-label-sm mt-1">Profile</span>
-</a>
-</div>
-</nav>
-</body></html>
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+  </script>
+</body>
+</html>

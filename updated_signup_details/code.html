@@ -494,11 +494,11 @@
                 }
                 btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Profile Saved!';
                 setTimeout(() => {
-                    window.location.href = '../home_feed_new_theme/code.html';
+                    window.location.href = '../index.html';
                 }, 1000);
             } catch (err) {
                 console.warn('Profile save note:', err.message);
-                window.location.href = '../home_feed_new_theme/code.html';
+                window.location.href = '../index.html';
             } finally {
                 btn.disabled = false;
             }
