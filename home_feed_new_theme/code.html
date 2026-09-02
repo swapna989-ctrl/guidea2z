@@ -1,0 +1,490 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/theme.css">
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabaseClient.js"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "primary-fixed-dim": "#ffb4a2",
+                "surface": "#fff8f6",
+                "tertiary": "#4e616e",
+                "on-background": "#221a17",
+                "surface-container-high": "#f6e4e0",
+                "on-surface": "#221a17",
+                "secondary-fixed-dim": "#aacfbb",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#c3e8d4",
+                "primary": "#994530",
+                "secondary": "#446555",
+                "error": "#ba1a1a",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#994530",
+                "on-primary-fixed": "#3c0700",
+                "on-secondary-fixed-variant": "#2c4d3e",
+                "tertiary-fixed-dim": "#b6c9d9",
+                "inverse-surface": "#382e2c",
+                "background": "#fff8f6",
+                "inverse-primary": "#ffb4a2",
+                "tertiary-fixed": "#d2e5f5",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#2c3e4b",
+                "on-secondary-fixed": "#002115",
+                "inverse-on-surface": "#ffede9",
+                "on-tertiary-fixed-variant": "#374956",
+                "outline-variant": "#dbc1bb",
+                "surface-container-highest": "#f0dfdb",
+                "surface-bright": "#fff8f6",
+                "primary-container": "#f28b71",
+                "surface-container": "#fceae6",
+                "surface-container-low": "#fff1ed",
+                "on-error-container": "#93000a",
+                "secondary-fixed": "#c6ebd6",
+                "primary-fixed": "#ffdad2",
+                "surface-variant": "#f0dfdb",
+                "outline": "#88726d",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed": "#0a1d29",
+                "surface-dim": "#e7d6d2",
+                "on-primary-fixed-variant": "#7a2f1b",
+                "on-primary-container": "#6c2412",
+                "on-surface-variant": "#55433e",
+                "on-primary": "#ffffff",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#486a59",
+                "tertiary-container": "#96a9b8"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "md": "24px",
+                "base": "8px",
+                "gutter": "24px",
+                "sm": "12px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "xl": "80px",
+                "lg": "48px",
+                "xs": "4px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background min-h-screen pb-24 pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 dark:bg-surface-dim/80 shadow-sm border-b border-outline-variant/30">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-screen-xl mx-auto">
+<!-- Left: Logo -->
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 object-contain" src="../sign_up/logo.png" alt="guidea2z logo">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">guidea2z</h1>
+</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex gap-2 items-center h-full">
+<a class="font-label-md text-label-md text-primary bg-surface-container-high px-4 py-2 rounded-lg font-semibold" href="../home_feed_new_theme/code.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../browse_new_theme/code.html">Browse</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../saved_guides/code.html">Saved</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../post_guide_new_theme/code.html">Post</a>
+<button type="button" class="theme-toggle-btn w-9 h-9 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center ml-1" title="Toggle Dark/Light Mode">
+  <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+</button>
+<a href="../account_settings/code.html" class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm hover:bg-primary/20 transition-colors ml-1">
+<span class="material-symbols-outlined text-base">person</span>
+</a>
+</div>
+<!-- Mobile: Actions (Theme Toggle + Search) -->
+<div class="flex items-center gap-1 md:hidden">
+  <button type="button" class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+    <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+  </button>
+  <a href="../browse_new_theme/code.html" aria-label="Search guides" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+    <span class="material-symbols-outlined">search</span>
+  </a>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop mt-md space-y-lg">
+<!-- Welcome Banner Section -->
+<section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-fixed to-secondary-fixed shadow-sm border border-outline-variant/30 p-md md:p-lg flex flex-col justify-center min-h-[200px]">
+<!-- Decorative background pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(theme('colors.primary') 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-md">
+<div class="space-y-xs max-w-lg">
+<!-- FIX: default is neutral, JS updates it to user's real name -->
+<h2 id="welcome-heading" class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-primary-container font-bold tracking-tight">Welcome back! 👋</h2>
+<p id="welcome-subtext" class="font-body-lg text-body-lg text-on-surface-variant">Kickstart your engineering journey with curated knowledge blocks and senior insights.</p>
+</div>
+<div class="w-full md:w-auto relative group">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-secondary to-primary rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+<div class="relative flex items-center bg-surface-container-lowest rounded-lg border border-outline-variant focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all shadow-sm">
+<span class="material-symbols-outlined ml-4 text-on-surface-variant">search</span>
+<input id="banner-search" class="w-full md:w-80 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface py-3 px-4 placeholder:text-outline" placeholder="Search for subjects, topics, or guides..." type="text">
+<button id="banner-search-btn" type="button" class="mr-2 px-3 py-1.5 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-surface-tint transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- YOUR DEPARTMENT Section (personalized) -->
+<section id="dept-section" class="hidden">
+<div class="flex items-center justify-between mb-md">
+<h3 id="dept-section-heading" class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: &quot;FILL&quot; 1;">school</span>
+Your Department
+</h3>
+<a id="dept-browse-link" href="../browse_new_theme/code.html" class="font-body-md text-body-md text-secondary hover:text-secondary-container transition-colors font-medium">View All</a>
+</div>
+<div id="dept-guides-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+  <div class="col-span-full p-8 text-center text-on-surface-variant">
+    <span class="material-symbols-outlined text-4xl text-primary animate-spin mb-2">refresh</span>
+    <p class="font-body-md text-body-md">Loading your department's guides...</p>
+  </div>
+</div>
+</section>
+
+<!-- TRENDING Section (all community guides) -->
+<section>
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: &quot;FILL&quot; 1;">trending_up</span>
+Trending Guides
+</h3>
+<a href="../browse_new_theme/code.html" class="font-body-md text-body-md text-secondary hover:text-secondary-container transition-colors font-medium">View All</a>
+</div>
+<div id="trending-guides-container" class="grid grid-cols-1 md:grid-cols-12 gap-gutter md:gap-md auto-rows-min">
+  <div class="col-span-12 p-8 text-center bg-surface-container-lowest rounded-xl border border-outline-variant/30 text-on-surface-variant">
+    <span class="material-symbols-outlined text-4xl text-primary animate-spin mb-2">refresh</span>
+    <p class="font-body-md text-body-md">Loading community guides...</p>
+  </div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface dark:bg-surface-dim shadow-[0_-4px_12px_rgba(0,53,95,0.08)] z-50 rounded-t-xl"><a class="flex flex-col items-center justify-center bg-secondary-fixed text-on-secondary-fixed-variant rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="../home_feed_new_theme/code.html" aria-current="page">
+  <span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">home</span>
+  <span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 w-16" href="../browse_new_theme/code.html">
+  <span class="material-symbols-outlined">explore</span>
+  <span class="font-label-sm text-label-sm mt-1">Browse</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 w-16" href="../post_guide_new_theme/code.html">
+  <span class="material-symbols-outlined">add_circle</span>
+  <span class="font-label-sm text-label-sm mt-1">Post</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 w-16" href="../saved_guides/code.html">
+  <span class="material-symbols-outlined">bookmark</span>
+  <span class="font-label-sm text-label-sm mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 w-16" href="../account_settings/code.html">
+  <span class="material-symbols-outlined">person</span>
+  <span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a></nav>
+<!-- Spacer for BottomNavBar on mobile to prevent content overlap -->
+<div class="h-20 md:hidden"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Banner search bar — redirect to Browse with query
+    const bannerSearch = document.getElementById('banner-search');
+    const bannerSearchBtn = document.getElementById('banner-search-btn');
+    function goToBrowseSearch() {
+      const q = bannerSearch?.value?.trim();
+      const url = q
+        ? `../browse_new_theme/code.html?q=${encodeURIComponent(q)}`
+        : `../browse_new_theme/code.html`;
+      window.location.href = url;
+    }
+    bannerSearchBtn?.addEventListener('click', goToBrowseSearch);
+    bannerSearch?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') goToBrowseSearch();
+    });
+
+    // ── Step 1: Resolve user name (fast from localStorage, then confirm from Supabase) ──
+    let userDept = null;
+
+    // Instantly update from localStorage (no delay for user)
+    try {
+      const localProf = localStorage.getItem('guidea2z_profile');
+      if (localProf) {
+        const parsed = JSON.parse(localProf);
+        if (parsed.name) setWelcomeName(parsed.name);
+        if (parsed.department) userDept = parsed.department;
+      }
+    } catch (e) {}
+
+    // Then confirm/update from Supabase auth + profile
+    if (window.Guidea2zSupabase) {
+      try {
+        const user = await window.Guidea2zSupabase.auth.getCurrentUser();
+        if (user) {
+          // Update name from auth metadata
+          const rawName = user.user_metadata?.full_name || user.email.split('@')[0];
+          setWelcomeName(rawName);
+
+          // Fetch department from profile table
+          const client = window.Guidea2zSupabase.getSupabase();
+          if (client) {
+            const { data: profile } = await client
+              .from('profiles')
+              .select('department, year, full_name')
+              .eq('id', user.id)
+              .single();
+
+            if (profile) {
+              if (profile.full_name) setWelcomeName(profile.full_name);
+              if (profile.department) {
+                userDept = profile.department;
+                // Sync to localStorage
+                const lp = JSON.parse(localStorage.getItem('guidea2z_profile') || '{}');
+                lp.department = profile.department;
+                lp.year = profile.year;
+                localStorage.setItem('guidea2z_profile', JSON.stringify(lp));
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.log('[guidea2z] Auth check:', err.message);
+      }
+    }
+
+    // ── Step 2: Load guides ──
+    loadTrendingGuides(userDept);
+  });
+
+  function setWelcomeName(rawName) {
+    const firstName = rawName.trim().split(' ')[0];
+    const name = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    const heading = document.getElementById('welcome-heading');
+    if (heading) heading.textContent = `Welcome, ${name}! 👋`;
+  }
+
+  async function loadTrendingGuides(userDept) {
+    const trendingContainer = document.getElementById('trending-guides-container');
+    const deptContainer = document.getElementById('dept-guides-container');
+    const deptSection = document.getElementById('dept-section');
+    if (!trendingContainer) return;
+
+    try {
+      if (!window.Guidea2zSupabase) {
+        renderEmptyState(trendingContainer);
+        return;
+      }
+      const allGuides = await window.Guidea2zSupabase.db.fetchGuides();
+
+      if (allGuides && allGuides.length > 0) {
+        // ── Department-specific section ──
+        if (userDept && deptSection && deptContainer) {
+          const deptGuides = allGuides.filter(g =>
+            (g.category || '').toLowerCase() === userDept.toLowerCase()
+          );
+
+          if (deptGuides.length > 0) {
+            deptSection.classList.remove('hidden');
+            const heading = document.getElementById('dept-section-heading');
+            if (heading) heading.innerHTML = `
+              <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">school</span>
+              Your ${userDept} Guides
+            `;
+            const deptLink = document.getElementById('dept-browse-link');
+            if (deptLink) deptLink.href = `../browse_new_theme/code.html?dept=${encodeURIComponent(userDept)}`;
+
+            deptContainer.innerHTML = deptGuides.slice(0, 3).map(guide => buildGuideCard(guide, 'col-span-1')).join('');
+          }
+        }
+
+        // ── Trending section (all guides) ──
+        trendingContainer.innerHTML = allGuides.slice(0, 6).map((guide, idx) => {
+          const isLarge = idx % 3 === 0;
+          const colSpan = isLarge ? 'col-span-1 md:col-span-8' : 'col-span-1 md:col-span-4';
+          return buildGuideCard(guide, colSpan);
+        }).join('');
+      } else {
+        renderEmptyState(trendingContainer);
+      }
+    } catch (err) {
+      console.warn('Error loading guides:', err);
+      renderEmptyState(trendingContainer);
+    }
+  }
+
+  function buildGuideCard(guide, colSpan) {
+    const author = guide.author_name || 'Community Member';
+    const category = guide.category || 'General';
+    const summary = guide.summary || 'Click to view full guide details and study notes.';
+    const stepsCount = Array.isArray(guide.steps) ? guide.steps.length : 0;
+
+    return `
+      <article class="${colSpan} bg-surface-container-lowest rounded-[1rem] border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-md flex flex-col justify-between group relative overflow-hidden">
+        <div class="space-y-xs">
+          <div class="flex items-center justify-between mb-2">
+            <span class="inline-block bg-primary-container/30 text-on-primary-container px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold border border-primary/10">
+              #${category.toLowerCase()}
+            </span>
+            <span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">format_list_bulleted</span> ${stepsCount} steps
+            </span>
+          </div>
+          <h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">${escapeHtml(guide.title)}</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">${escapeHtml(summary)}</p>
+        </div>
+        <div class="mt-md pt-sm flex items-center justify-between border-t border-outline-variant/30">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs uppercase">
+              ${escapeHtml(author.charAt(0))}
+            </div>
+            <p class="font-body-md text-body-md font-medium text-on-surface">${escapeHtml(author)}</p>
+          </div>
+          <a href="../guide_detail_new_theme/code.html?id=${guide.id}" class="bg-primary text-on-primary font-body-md text-body-md px-4 py-2 rounded-lg hover:bg-surface-tint transition-colors flex items-center gap-1 min-h-[40px]">
+            Read Guide
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderEmptyState(container) {
+    container.innerHTML = `
+      <div class="col-span-12 p-10 text-center bg-surface-container-lowest rounded-[1.5rem] border border-outline-variant/40 shadow-sm flex flex-col items-center justify-center gap-3">
+        <div class="w-16 h-16 rounded-full bg-surface-container-low text-primary flex items-center justify-center mb-1">
+          <span class="material-symbols-outlined text-3xl">post_add</span>
+        </div>
+        <h4 class="font-headline-md text-headline-md text-on-surface">No Guides Available Yet</h4>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-md">Be the first to share your knowledge! Create and publish a guide for your classmates.</p>
+        <a href="../post_guide_new_theme/code.html" class="mt-2 px-6 py-3 bg-primary hover:bg-surface-tint text-on-primary font-semibold text-sm rounded-full shadow-md transition-all inline-flex items-center gap-2">
+          <span class="material-symbols-outlined text-lg">add_circle</span>
+          Post a Guide
+        </a>
+      </div>
+    `;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+</script>
+</body></html>

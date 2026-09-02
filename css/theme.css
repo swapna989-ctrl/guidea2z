@@ -1,0 +1,192 @@
+/* ==========================================================
+   guidea2z Dark Mode & Theme System
+   Premium Terracotta + Warm Slate Dark Theme Styles
+   ========================================================== */
+
+:root {
+  color-scheme: light dark;
+}
+
+/* Smooth transitions for theme switching */
+body, header, nav, main, article, section, div, button, input, select, textarea {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* ================= DARK THEME OVERRIDES ================= */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #120c0a !important;
+  color: #ede0dc !important;
+}
+
+/* Surfaces & Containers */
+html.dark .bg-surface {
+  background-color: #120c0a !important;
+}
+
+html.dark .bg-surface-container-low {
+  background-color: #18110f !important;
+}
+
+html.dark .bg-surface-container {
+  background-color: #1f1614 !important;
+}
+
+html.dark .bg-surface-container-high {
+  background-color: #261c19 !important;
+}
+
+html.dark .bg-surface-container-highest {
+  background-color: #312421 !important;
+}
+
+html.dark .bg-surface-container-lowest {
+  background-color: #1a1311 !important;
+}
+
+html.dark .bg-background {
+  background-color: #120c0a !important;
+}
+
+/* Text Colors */
+html.dark .text-on-surface {
+  color: #ede0dc !important;
+}
+
+html.dark .text-on-surface-variant {
+  color: #cbb9b4 !important;
+}
+
+html.dark .text-outline {
+  color: #9c8a85 !important;
+}
+
+html.dark .text-outline-variant {
+  color: #796a66 !important;
+}
+
+html.dark .text-primary {
+  color: #ff8e75 !important;
+}
+
+html.dark .text-secondary {
+  color: #89cca8 !important;
+}
+
+html.dark .text-tertiary {
+  color: #a7bccd !important;
+}
+
+/* Borders */
+html.dark .border-outline-variant,
+html.dark .border-outline-variant\/30,
+html.dark .border-outline-variant\/40,
+html.dark .border-outline-variant\/50 {
+  border-color: rgba(219, 193, 187, 0.14) !important;
+}
+
+html.dark .border-outline {
+  border-color: rgba(219, 193, 187, 0.25) !important;
+}
+
+html.dark .divide-outline-variant\/20 > * + * {
+  border-color: rgba(219, 193, 187, 0.12) !important;
+}
+
+/* Header & Navigation */
+html.dark header {
+  background-color: rgba(18, 12, 10, 0.88) !important;
+  border-color: rgba(219, 193, 187, 0.12) !important;
+}
+
+html.dark nav {
+  background-color: rgba(26, 19, 17, 0.95) !important;
+  border-color: rgba(219, 193, 187, 0.12) !important;
+}
+
+/* Form Inputs, Selects & Textareas */
+html.dark input:not([type="checkbox"]):not([type="radio"]),
+html.dark select,
+html.dark textarea {
+  background-color: #1a1311 !important;
+  color: #ede0dc !important;
+  border-color: rgba(219, 193, 187, 0.2) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8c7b76 !important;
+}
+
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+  border-color: #ff8e75 !important;
+  box-shadow: 0 0 0 2px rgba(255, 142, 117, 0.25) !important;
+}
+
+/* Chips, Tags & Badges */
+html.dark .bg-primary-container\/30 {
+  background-color: rgba(242, 139, 113, 0.15) !important;
+  color: #ffb4a2 !important;
+  border-color: rgba(242, 139, 113, 0.25) !important;
+}
+
+html.dark .bg-secondary-fixed {
+  background-color: #274737 !important;
+  color: #c6ebd6 !important;
+}
+
+html.dark .bg-primary-fixed {
+  background-color: #4b1a10 !important;
+  color: #ffdad2 !important;
+}
+
+html.dark .bg-secondary-container {
+  background-color: #1e3a2c !important;
+  color: #c6ebd6 !important;
+}
+
+html.dark .bg-primary-container {
+  background-color: #4b1a10 !important;
+  color: #ffdad2 !important;
+}
+
+/* Cards & Articles Hover */
+html.dark article {
+  background-color: #1a1311 !important;
+  border-color: rgba(219, 193, 187, 0.14) !important;
+}
+
+html.dark article:hover {
+  border-color: rgba(255, 142, 117, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Banner Gradients in Dark Mode */
+html.dark section.bg-gradient-to-br {
+  background: linear-gradient(135deg, #38150c 0%, #1e3328 100%) !important;
+  border-color: rgba(255, 142, 117, 0.2) !important;
+}
+
+/* Custom Scrollbars in Dark Mode */
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #140e0c;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #332521;
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4a3732;
+}

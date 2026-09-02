@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Guides - guidea2z</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary-fixed-dim": "#ffb4a2",
+          "surface": "#fff8f6",
+          "tertiary": "#4e616e",
+          "on-background": "#221a17",
+          "surface-container-high": "#f6e4e0",
+          "on-surface": "#221a17",
+          "secondary-fixed-dim": "#aacfbb",
+          "surface-container-lowest": "#ffffff",
+          "secondary-container": "#c3e8d4",
+          "primary": "#994530",
+          "secondary": "#446555",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "surface-tint": "#994530",
+          "on-primary-fixed": "#3c0700",
+          "on-secondary-fixed-variant": "#2c4d3e",
+          "tertiary-fixed-dim": "#b6c9d9",
+          "inverse-surface": "#382e2c",
+          "background": "#fff8f6",
+          "inverse-primary": "#ffb4a2",
+          "tertiary-fixed": "#d2e5f5",
+          "on-secondary": "#ffffff",
+          "on-tertiary-container": "#2c3e4b",
+          "on-secondary-fixed": "#002115",
+          "inverse-on-surface": "#ffede9",
+          "on-tertiary-fixed-variant": "#374956",
+          "outline-variant": "#dbc1bb",
+          "surface-container-highest": "#f0dfdb",
+          "surface-bright": "#fff8f6",
+          "primary-container": "#f28b71",
+          "surface-container": "#fceae6",
+          "surface-container-low": "#fff1ed",
+          "on-error-container": "#93000a",
+          "secondary-fixed": "#c6ebd6",
+          "primary-fixed": "#ffdad2",
+          "surface-variant": "#f0dfdb",
+          "outline": "#88726d",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed": "#0a1d29",
+          "surface-dim": "#e7d6d2",
+          "on-primary-fixed-variant": "#7a2f1b",
+          "on-primary-container": "#6c2412",
+          "on-surface-variant": "#55433e",
+          "on-primary": "#ffffff",
+          "on-error": "#ffffff",
+          "on-secondary-container": "#486a59",
+          "tertiary-container": "#96a9b8"
+        },
+        fontFamily: {
+          "sans": ["Hanken Grotesk", "sans-serif"],
+          "display-lg": ["Hanken Grotesk"],
+          "headline-md": ["Hanken Grotesk"],
+          "headline-lg": ["Hanken Grotesk"],
+          "body-lg": ["Hanken Grotesk"],
+          "label-md": ["Hanken Grotesk"],
+          "label-sm": ["Hanken Grotesk"],
+          "body-md": ["Hanken Grotesk"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../css/theme.css">
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabaseClient.js"></script>
+<style>
+  body {
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .guide-card-anim {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-24 md:pb-12 pt-16 font-sans">
+
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 fixed top-0 w-full z-50 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm">
+  <div class="flex items-center justify-between px-4 md:px-8 h-16 w-full max-w-screen-xl mx-auto">
+    
+    <!-- Brand & Logo -->
+    <div class="flex items-center gap-3">
+      <a href="../account_settings/code.html" id="header-avatar-btn" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/50 flex items-center justify-center bg-primary-container text-on-primary-container font-bold text-sm shadow-sm hover:ring-2 hover:ring-primary transition-all">
+        <img id="header-avatar-img" src="" class="hidden w-full h-full object-cover" alt="User avatar">
+        <span id="header-avatar-initial">S</span>
+      </a>
+      <a href="../home_feed_new_theme/code.html" class="flex items-center gap-2 group">
+        <img src="../sign_up/logo.png" class="w-8 h-8 object-contain transition-transform group-hover:scale-105" alt="guidea2z logo">
+        <span class="text-xl md:text-2xl font-bold text-primary tracking-tight">guidea2z</span>
+      </a>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex gap-2 items-center h-full">
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../home_feed_new_theme/code.html">Home</a>
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../browse_new_theme/code.html">Browse</a>
+      <a class="text-sm font-bold text-primary bg-surface-container-high px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm" href="../saved_guides/code.html">
+        <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+        Saved
+      </a>
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../post_guide_new_theme/code.html">Post</a>
+    </div>
+
+    <!-- Right Action: Theme Toggle & Search -->
+    <div class="flex items-center gap-1.5">
+      <button type="button" class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+      </button>
+      <a href="../browse_new_theme/code.html" aria-label="Search guides" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95">
+        <span class="material-symbols-outlined">search</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="max-w-screen-xl mx-auto px-4 md:px-8 pt-6 md:pt-10 mb-12">
+  
+  <!-- Hero Section -->
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-4 border-b border-outline-variant/30">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">bookmarks</span>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-on-surface tracking-tight">Saved Guides</h1>
+      </div>
+      <p class="text-sm md:text-base text-on-surface-variant">Your personal collection of bookmarked campus guides and study notes.</p>
+    </div>
+    
+    <!-- Guides Counter Badge -->
+    <div class="flex items-center gap-2">
+      <span id="saved-count-badge" class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold shadow-sm">
+        0 Guides Saved
+      </span>
+    </div>
+  </div>
+
+  <!-- Search & Department Filter Bar -->
+  <div class="space-y-3 mb-8">
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline">search</span>
+      <input id="saved-search-input" type="text" placeholder="Filter through your saved guides..." class="w-full pl-10 pr-10 py-3 rounded-2xl border border-outline-variant/60 bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:outline-none text-sm text-on-surface placeholder:text-outline transition-all shadow-sm">
+      <button id="clear-search-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface">
+        <span class="material-symbols-outlined text-lg">cancel</span>
+      </button>
+    </div>
+
+    <!-- Quick Department Filter Pills -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide text-xs font-semibold">
+      <button onclick="filterSavedDept('All')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-primary text-on-primary shadow-sm transition-all whitespace-nowrap" data-dept="All">All</button>
+      <button onclick="filterSavedDept('CSE')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="CSE">CSE</button>
+      <button onclick="filterSavedDept('CSM')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="CSM">CSM</button>
+      <button onclick="filterSavedDept('CSD')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="CSD">CSD</button>
+      <button onclick="filterSavedDept('IT')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="IT">IT</button>
+      <button onclick="filterSavedDept('ECE')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="ECE">ECE</button>
+      <button onclick="filterSavedDept('EEE')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="EEE">EEE</button>
+      <button onclick="filterSavedDept('Mechanical')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="Mechanical">Mechanical</button>
+      <button onclick="filterSavedDept('Civil')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="Civil">Civil</button>
+      <button onclick="filterSavedDept('Others')" class="dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap" data-dept="Others">Others</button>
+    </div>
+  </div>
+
+  <!-- Saved Guides Grid -->
+  <div id="saved-guides-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Initial Loading State -->
+    <div class="col-span-full text-center py-16 bg-surface-container-lowest rounded-2xl border border-outline-variant/30 text-on-surface-variant shadow-sm">
+      <span class="material-symbols-outlined text-4xl text-primary animate-spin mb-3">refresh</span>
+      <p class="font-medium text-sm">Loading your saved guides...</p>
+    </div>
+  </div>
+</main>
+
+<!-- Floating Toast Notification -->
+<div id="toast-msg" class="fixed bottom-20 md:bottom-6 right-4 left-4 md:left-auto md:max-w-sm z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between gap-3 text-sm">
+  <span id="toast-text" class="flex-1 font-medium"></span>
+  <button id="toast-close" class="text-primary-fixed hover:underline font-semibold text-xs">Dismiss</button>
+</div>
+
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-2xl bg-surface shadow-lg border-t border-outline-variant/30">
+  <div class="flex justify-around items-center px-4 py-2 pb-safe">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../home_feed_new_theme/code.html">
+      <span class="material-symbols-outlined">home</span>
+      <span class="text-[11px] font-medium mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../browse_new_theme/code.html">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="text-[11px] font-medium mt-1">Browse</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../post_guide_new_theme/code.html">
+      <span class="material-symbols-outlined">add_circle</span>
+      <span class="text-[11px] font-medium mt-1">Post</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-secondary-fixed text-on-secondary-fixed-variant rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="../saved_guides/code.html">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+      <span class="text-[11px] font-bold mt-1">Saved</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../account_settings/code.html">
+      <span class="material-symbols-outlined">person</span>
+      <span class="text-[11px] font-medium mt-1">Profile</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+  let allSavedGuides = [];
+  let currentActiveDept = 'All';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Sync User Avatar Header from Local Storage
+    loadHeaderAvatar();
+
+    // 2. Search & Clear Listeners
+    const searchInput = document.getElementById('saved-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+
+    searchInput?.addEventListener('input', (e) => {
+      const val = e.target.value;
+      if (val.length > 0) {
+        clearBtn?.classList.remove('hidden');
+      } else {
+        clearBtn?.classList.add('hidden');
+      }
+      renderFilteredGuides();
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      clearBtn.classList.add('hidden');
+      renderFilteredGuides();
+    });
+
+    // 3. Load Saved Guides
+    await loadSavedGuides();
+  });
+
+  function loadHeaderAvatar() {
+    try {
+      const savedProfile = localStorage.getItem('guidea2z_profile');
+      const savedAvatar = localStorage.getItem('guidea2z_avatar');
+      const avatarImg = document.getElementById('header-avatar-img');
+      const avatarInitial = document.getElementById('header-avatar-initial');
+
+      if (savedAvatar && avatarImg) {
+        avatarImg.src = savedAvatar;
+        avatarImg.classList.remove('hidden');
+        if (avatarInitial) avatarInitial.classList.add('hidden');
+      } else if (savedProfile) {
+        const parsed = JSON.parse(savedProfile);
+        if (parsed.name && avatarInitial) {
+          avatarInitial.textContent = parsed.name.charAt(0).toUpperCase();
+        }
+      }
+    } catch(e) {}
+  }
+
+  async function loadSavedGuides() {
+    const container = document.getElementById('saved-guides-container');
+    if (!container) return;
+
+    try {
+      if (window.Guidea2zSupabase) {
+        const client = window.Guidea2zSupabase.getSupabase();
+        const user = await window.Guidea2zSupabase.auth.getCurrentUser();
+
+        if (client && user) {
+          const { data: savedEntries } = await client
+            .from('saved_guides')
+            .select('guide_id, guides(*)')
+            .eq('user_id', user.id);
+
+          if (savedEntries && savedEntries.length > 0) {
+            allSavedGuides = savedEntries.map(e => e.guides).filter(Boolean);
+            renderFilteredGuides();
+            return;
+          }
+        }
+      }
+
+      // Check LocalStorage Saved Guides (Preview / Offline mode)
+      const localSaved = localStorage.getItem('guidea2z_saved_guides');
+      if (localSaved) {
+        const parsed = JSON.parse(localSaved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          allSavedGuides = parsed;
+          renderFilteredGuides();
+          return;
+        }
+      }
+
+      // If no guides saved, render empty state
+      allSavedGuides = [];
+      renderFilteredGuides();
+
+    } catch (err) {
+      console.warn('Error loading saved guides:', err);
+      allSavedGuides = [];
+      renderFilteredGuides();
+    }
+  }
+
+  function filterSavedDept(dept) {
+    currentActiveDept = dept;
+    document.querySelectorAll('.dept-filter-pill').forEach(btn => {
+      if (btn.getAttribute('data-dept') === dept) {
+        btn.className = 'dept-filter-pill px-3.5 py-1.5 rounded-full bg-primary text-on-primary shadow-sm transition-all whitespace-nowrap';
+      } else {
+        btn.className = 'dept-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition-all whitespace-nowrap';
+      }
+    });
+    renderFilteredGuides();
+  }
+
+  function renderFilteredGuides() {
+    const container = document.getElementById('saved-guides-container');
+    const badge = document.getElementById('saved-count-badge');
+    if (!container) return;
+
+    const query = document.getElementById('saved-search-input')?.value?.toLowerCase()?.trim() || '';
+
+    const filtered = allSavedGuides.filter(guide => {
+      // Dept filter
+      let matchesDept = true;
+      if (currentActiveDept !== 'All') {
+        const guideCategory = (guide.category || '').toLowerCase();
+        const targetDept = currentActiveDept.toLowerCase();
+        matchesDept = guideCategory.includes(targetDept) || targetDept.includes(guideCategory);
+      }
+
+      // Query filter
+      let matchesQuery = true;
+      if (query) {
+        const titleMatch = (guide.title || '').toLowerCase().includes(query);
+        const summaryMatch = (guide.summary || '').toLowerCase().includes(query);
+        const catMatch = (guide.category || '').toLowerCase().includes(query);
+        matchesQuery = titleMatch || summaryMatch || catMatch;
+      }
+
+      return matchesDept && matchesQuery;
+    });
+
+    if (badge) {
+      badge.textContent = `${filtered.length} ${filtered.length === 1 ? 'Guide' : 'Guides'} Saved`;
+    }
+
+    if (filtered.length === 0) {
+      renderEmptyState(container, query);
+      return;
+    }
+
+    container.innerHTML = filtered.map(guide => {
+      const author = guide.author_name || 'Community';
+      const category = guide.category || 'General';
+      const stepsCount = Array.isArray(guide.steps) ? guide.steps.length : 1;
+
+      return `
+        <article id="guide-card-${guide.id}" class="guide-card-anim bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between group relative">
+          
+          <div>
+            <!-- Card Header: Category badge + Unsave Bookmark Button -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold">
+                <span class="material-symbols-outlined text-xs">tag</span>
+                ${escapeHtml(category)}
+              </span>
+
+              <!-- Remove / Unbookmark button -->
+              <button onclick="handleUnsave('${guide.id}')" title="Remove from saved" class="w-8 h-8 rounded-full flex items-center justify-center text-primary bg-primary-fixed/30 hover:bg-primary hover:text-white transition-colors active:scale-90">
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">bookmark_remove</span>
+              </button>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug mb-2">
+              <a href="../guide_detail_new_theme/code.html?id=${guide.id}">${escapeHtml(guide.title)}</a>
+            </h3>
+
+            <!-- Summary -->
+            <p class="text-sm text-on-surface-variant line-clamp-3 leading-relaxed mb-4">
+              ${escapeHtml(guide.summary || 'Click below to read the complete breakdown and study tips.')}
+            </p>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">
+                ${escapeHtml(author.charAt(0).toUpperCase())}
+              </div>
+              <span class="text-xs font-medium text-outline">${escapeHtml(author)}</span>
+            </div>
+
+            <a href="../guide_detail_new_theme/code.html?id=${guide.id}" class="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-surface-tint active:scale-95 shadow-sm transition-all">
+              Read Guide
+              <span class="material-symbols-outlined text-xs">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  async function handleUnsave(guideId) {
+    const card = document.getElementById(`guide-card-${guideId}`);
+    if (card) {
+      card.style.opacity = '0.3';
+      card.style.transform = 'scale(0.95)';
+    }
+
+    try {
+      if (window.Guidea2zSupabase) {
+        await window.Guidea2zSupabase.db.toggleSaveGuide(guideId);
+      }
+
+      // Remove from memory
+      allSavedGuides = allSavedGuides.filter(g => String(g.id) !== String(guideId));
+      localStorage.setItem('guidea2z_saved_guides', JSON.stringify(allSavedGuides));
+
+      setTimeout(() => {
+        renderFilteredGuides();
+        showToast('Guide removed from your bookmarks');
+      }, 250);
+
+    } catch (err) {
+      if (card) {
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+      }
+      showToast('Could not remove bookmark: ' + (err.message || 'Error'));
+    }
+  }
+
+  function renderEmptyState(container, query = '') {
+    const isFiltered = query.length > 0 || currentActiveDept !== 'All';
+
+    container.innerHTML = `
+      <div class="col-span-full text-center py-16 px-4 bg-surface-container-lowest rounded-3xl border border-outline-variant/40 shadow-sm flex flex-col items-center justify-center gap-3">
+        <div class="w-16 h-16 rounded-full bg-surface-container-low text-primary flex items-center justify-center mb-1 shadow-inner">
+          <span class="material-symbols-outlined text-3xl">${isFiltered ? 'search_off' : 'bookmark_border'}</span>
+        </div>
+        <h3 class="text-xl font-bold text-on-surface">
+          ${isFiltered ? 'No Matching Saved Guides' : 'No Saved Guides Yet'}
+        </h3>
+        <p class="text-sm text-on-surface-variant max-w-md">
+          ${isFiltered 
+            ? 'Try changing your search keywords or selecting another department.' 
+            : 'Explore study guides across campus and tap the bookmark icon on any guide to save it here for quick offline access!'}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-2">
+          ${isFiltered ? `
+            <button onclick="clearAllFilters()" class="px-5 py-2.5 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-bold rounded-full transition-all">
+              Clear Filters
+            </button>
+          ` : `
+            <a href="../browse_new_theme/code.html" class="px-6 py-3 bg-primary hover:bg-surface-tint text-on-primary font-bold text-xs rounded-full shadow-md transition-all inline-flex items-center gap-2">
+              <span class="material-symbols-outlined text-base">explore</span>
+              Browse Departments
+            </a>
+          `}
+        </div>
+      </div>
+    `;
+  }
+
+  function clearAllFilters() {
+    const input = document.getElementById('saved-search-input');
+    if (input) input.value = '';
+    document.getElementById('clear-search-btn')?.classList.add('hidden');
+    filterSavedDept('All');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast-msg');
+    const toastText = document.getElementById('toast-text');
+    if (!toast || !toastText) return;
+
+    toastText.textContent = message;
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+    document.getElementById('toast-close').onclick = () => {
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    };
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }, 3500);
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+</script>
+</body>
+</html>

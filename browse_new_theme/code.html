@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Departments - guidea2z</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary-fixed-dim": "#ffb4a2",
+          "surface": "#fff8f6",
+          "tertiary": "#4e616e",
+          "on-background": "#221a17",
+          "surface-container-high": "#f6e4e0",
+          "on-surface": "#221a17",
+          "secondary-fixed-dim": "#aacfbb",
+          "surface-container-lowest": "#ffffff",
+          "secondary-container": "#c3e8d4",
+          "primary": "#994530",
+          "secondary": "#446555",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "surface-tint": "#994530",
+          "on-primary-fixed": "#3c0700",
+          "on-secondary-fixed-variant": "#2c4d3e",
+          "tertiary-fixed-dim": "#b6c9d9",
+          "inverse-surface": "#382e2c",
+          "background": "#fff8f6",
+          "inverse-primary": "#ffb4a2",
+          "tertiary-fixed": "#d2e5f5",
+          "on-secondary": "#ffffff",
+          "on-tertiary-container": "#2c3e4b",
+          "on-secondary-fixed": "#002115",
+          "inverse-on-surface": "#ffede9",
+          "on-tertiary-fixed-variant": "#374956",
+          "outline-variant": "#dbc1bb",
+          "surface-container-highest": "#f0dfdb",
+          "surface-bright": "#fff8f6",
+          "primary-container": "#f28b71",
+          "surface-container": "#fceae6",
+          "surface-container-low": "#fff1ed",
+          "on-error-container": "#93000a",
+          "secondary-fixed": "#c6ebd6",
+          "primary-fixed": "#ffdad2",
+          "surface-variant": "#f0dfdb",
+          "outline": "#88726d",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed": "#0a1d29",
+          "surface-dim": "#e7d6d2",
+          "on-primary-fixed-variant": "#7a2f1b",
+          "on-primary-container": "#6c2412",
+          "on-surface-variant": "#55433e",
+          "on-primary": "#ffffff",
+          "on-error": "#ffffff",
+          "on-secondary-container": "#486a59",
+          "tertiary-container": "#96a9b8"
+        },
+        fontFamily: {
+          "sans": ["Hanken Grotesk", "sans-serif"],
+          "display-lg": ["Hanken Grotesk"],
+          "headline-md": ["Hanken Grotesk"],
+          "headline-lg": ["Hanken Grotesk"],
+          "body-lg": ["Hanken Grotesk"],
+          "label-md": ["Hanken Grotesk"],
+          "label-sm": ["Hanken Grotesk"],
+          "body-md": ["Hanken Grotesk"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../css/theme.css">
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabaseClient.js"></script>
+<style>
+  body {
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .dept-active {
+    border-color: #994530 !important;
+    background-color: #f6e4e0 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(153, 69, 48, 0.15);
+  }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-sans pt-16 pb-24 md:pb-12 antialiased">
+
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 dark:bg-surface-dim/80 shadow-sm border-b border-outline-variant/30">
+  <div class="flex items-center justify-between px-4 md:px-8 h-16 w-full max-w-screen-xl mx-auto">
+    
+    <!-- Left: Avatar + Logo + Brand Title -->
+    <div class="flex items-center gap-3">
+      <a href="../account_settings/code.html" id="header-avatar-btn" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/50 flex items-center justify-center bg-primary-container text-on-primary-container font-bold text-sm shadow-sm hover:ring-2 hover:ring-primary transition-all">
+        <img id="header-avatar-img" src="" class="hidden w-full h-full object-cover" alt="User avatar">
+        <span id="header-avatar-initial">S</span>
+      </a>
+      <a href="../home_feed_new_theme/code.html" class="flex items-center gap-2 group">
+        <img src="../sign_up/logo.png" class="w-8 h-8 object-contain transition-transform group-hover:scale-105" alt="guidea2z logo">
+        <span class="text-xl md:text-2xl font-bold text-primary tracking-tight">guidea2z</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="hidden md:flex gap-2 items-center h-full">
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../home_feed_new_theme/code.html">Home</a>
+      <a class="text-sm font-bold text-primary bg-surface-container-high px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm" href="../browse_new_theme/code.html">
+        <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">explore</span>
+        Browse
+      </a>
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../saved_guides/code.html">Saved</a>
+      <a class="text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-xl" href="../post_guide_new_theme/code.html">Post</a>
+    </div>
+
+    <!-- Right Action: Theme Toggle & Search -->
+    <div class="flex items-center gap-1.5">
+      <button type="button" class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+      </button>
+      <button onclick="document.getElementById('browse-search-input')?.focus()" aria-label="Search guides" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="max-w-screen-xl mx-auto px-4 md:px-8 pt-6 md:pt-10 mb-12">
+  
+  <!-- Header Title -->
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">school</span>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-primary tracking-tight">Browse Departments</h1>
+    </div>
+    <p class="text-sm md:text-base text-on-surface-variant">Select your engineering department or search to find curated study guides, lab notes, and exam blueprints.</p>
+  </div>
+
+  <!-- Functional Search Bar -->
+  <div class="relative mb-8">
+    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+    <input id="browse-search-input" type="text" placeholder="Search guides by title, subject, topics, or branch..." class="w-full pl-12 pr-10 py-3.5 rounded-2xl border border-outline-variant/60 bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:outline-none shadow-sm text-sm md:text-base text-on-surface placeholder:text-outline transition-all">
+    <button id="clear-search-btn" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface">
+      <span class="material-symbols-outlined text-xl">cancel</span>
+    </button>
+  </div>
+
+  <!-- 12 Department Selection Cards Grid -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-sm font-bold text-on-surface uppercase tracking-wider">Select Department:</h2>
+      <button id="show-all-btn" onclick="filterDepartment('All')" class="text-xs font-bold text-secondary hover:underline">Show All (12)</button>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      
+      <!-- 1. CSE -->
+      <button onclick="filterDepartment('CSE')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="CSE">
+        <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center mb-2 group-hover:bg-primary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-primary-fixed text-xl">computer</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">CSE</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Computer Science</p>
+      </button>
+
+      <!-- 2. CSM -->
+      <button onclick="filterDepartment('CSM')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="CSM">
+        <div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center mb-2 group-hover:bg-secondary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-secondary-fixed text-xl">memory</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">CSM</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">AI &amp; ML</p>
+      </button>
+
+      <!-- 3. CSD -->
+      <button onclick="filterDepartment('CSD')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="CSD">
+        <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center mb-2 group-hover:bg-tertiary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-tertiary-fixed text-xl">terminal</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">CSD</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Data Science</p>
+      </button>
+
+      <!-- 4. CSC -->
+      <button onclick="filterDepartment('CSC')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="CSC">
+        <div class="w-10 h-10 rounded-xl bg-error-container flex items-center justify-center mb-2 group-hover:bg-[#ffb4ab] transition-colors">
+          <span class="material-symbols-outlined text-on-error-container text-xl">security</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">CSC</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Cyber Security</p>
+      </button>
+
+      <!-- 5. CSBS -->
+      <button onclick="filterDepartment('CSBS')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="CSBS">
+        <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center mb-2 group-hover:bg-primary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-primary-fixed text-xl">business_center</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">CSBS</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">CS &amp; Business</p>
+      </button>
+
+      <!-- 6. IT -->
+      <button onclick="filterDepartment('IT')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="IT">
+        <div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center mb-2 group-hover:bg-secondary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-secondary-fixed text-xl">lan</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">IT</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Information Tech</p>
+      </button>
+
+      <!-- 7. ECE -->
+      <button onclick="filterDepartment('ECE')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="ECE">
+        <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center mb-2 group-hover:bg-tertiary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-tertiary-fixed text-xl">settings_input_component</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">ECE</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Electronics</p>
+      </button>
+
+      <!-- 8. EEE -->
+      <button onclick="filterDepartment('EEE')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="EEE">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-2 group-hover:bg-amber-200 transition-colors">
+          <span class="material-symbols-outlined text-amber-900 text-xl">bolt</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">EEE</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Electrical</p>
+      </button>
+
+      <!-- 9. Mechanical -->
+      <button onclick="filterDepartment('Mechanical')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="Mechanical">
+        <div class="w-10 h-10 rounded-xl bg-error-container flex items-center justify-center mb-2 group-hover:bg-[#ffb4ab] transition-colors">
+          <span class="material-symbols-outlined text-on-error-container text-xl">engineering</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">Mechanical</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Robotics &amp; CAD</p>
+      </button>
+
+      <!-- 10. Civil -->
+      <button onclick="filterDepartment('Civil')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="Civil">
+        <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center mb-2 group-hover:bg-primary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-primary-fixed text-xl">architecture</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">Civil</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Structures &amp; Design</p>
+      </button>
+
+      <!-- 11. Chemical -->
+      <button onclick="filterDepartment('Chemical')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="Chemical">
+        <div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center mb-2 group-hover:bg-secondary-fixed-dim transition-colors">
+          <span class="material-symbols-outlined text-on-secondary-fixed text-xl">science</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">Chemical</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">Process &amp; Labs</p>
+      </button>
+
+      <!-- 12. Others -->
+      <button onclick="filterDepartment('Others')" class="dept-btn text-left bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-outline-variant/40 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 group" data-dept="Others">
+        <div class="w-10 h-10 rounded-xl bg-surface-variant flex items-center justify-center mb-2 group-hover:bg-surface-dim transition-colors">
+          <span class="material-symbols-outlined text-on-surface-variant text-xl">more_horiz</span>
+        </div>
+        <h3 class="text-sm font-bold text-on-surface">Others</h3>
+        <p class="text-[11px] text-on-surface-variant line-clamp-1">General Campus</p>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Results Header -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-2">
+      <h2 id="filter-header" class="text-lg md:text-xl font-bold text-primary">All Guides</h2>
+      <span id="guides-count-pill" class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary text-xs font-bold"></span>
+    </div>
+  </div>
+
+  <!-- Filtered Guides Grid -->
+  <div id="category-guides-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="col-span-full text-center py-16 bg-surface-container-lowest rounded-2xl border border-outline-variant/30 text-on-surface-variant shadow-sm">
+      <span class="material-symbols-outlined text-4xl text-primary animate-spin mb-3">refresh</span>
+      <p class="font-medium text-sm">Loading guides...</p>
+    </div>
+  </div>
+</main>
+
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-2xl bg-surface shadow-lg border-t border-outline-variant/30">
+  <div class="flex justify-around items-center px-4 py-2 pb-safe">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../home_feed_new_theme/code.html">
+      <span class="material-symbols-outlined">home</span>
+      <span class="text-[11px] font-medium mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-secondary-fixed text-on-secondary-fixed-variant rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="../browse_new_theme/code.html">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+      <span class="text-[11px] font-bold mt-1">Browse</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../post_guide_new_theme/code.html">
+      <span class="material-symbols-outlined">add_circle</span>
+      <span class="text-[11px] font-medium mt-1">Post</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../saved_guides/code.html">
+      <span class="material-symbols-outlined">bookmark</span>
+      <span class="text-[11px] font-medium mt-1">Saved</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary active:scale-90 transition-transform duration-150 w-16" href="../account_settings/code.html">
+      <span class="material-symbols-outlined">person</span>
+      <span class="text-[11px] font-medium mt-1">Profile</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+  let activeDepartment = 'All';
+  let allGuidesCache = [];
+
+  // Default Campus Starter Guides (Ensures all 12 departments have working guides out of the box)
+  const fallbackGuides = [
+    {
+      id: 'cse-1',
+      title: 'Data Structures & Algorithms in Java',
+      category: 'CSE',
+      author_name: 'Swapna Kumari',
+      summary: 'Complete roadmap for cracking college lab exams, tree traversals, graphs, and dynamic programming.',
+      steps: ['Master Recursion & Pointer manipulation', 'Practice Sorting & Binary Search', 'Solve LeetCode Top 50']
+    },
+    {
+      id: 'csm-1',
+      title: 'Machine Learning & Neural Networks 101',
+      category: 'CSM',
+      author_name: 'Rahul Sharma',
+      summary: 'Hands-on guide to PyTorch, TensorFlow, Gradient Descent, and building your first CNN image classifier.',
+      steps: ['Install Python & Anaconda Environment', 'Understand Forward & Backward Propagation', 'Deploy on HuggingFace']
+    },
+    {
+      id: 'csd-1',
+      title: 'Data Science & Big Data Analytics',
+      category: 'CSD',
+      author_name: 'Priya Patel',
+      summary: 'End-to-end data pipelines using Pandas, NumPy, SQL, and PowerBI visualization templates.',
+      steps: ['Clean missing data with Pandas', 'Build interactive dashboards', 'Run exploratory analysis']
+    },
+    {
+      id: 'csc-1',
+      title: 'Network Security & Ethical Hacking Labs',
+      category: 'CSC',
+      author_name: 'Vikram Rao',
+      summary: 'Guide to Wireshark packet analysis, cryptography ciphers, and securing Linux servers.',
+      steps: ['Setup Kali Linux VM', 'Capture packets in Wireshark', 'Implement RSA & AES Encryption']
+    },
+    {
+      id: 'csbs-1',
+      title: 'Business Systems & Agile Software Delivery',
+      category: 'CSBS',
+      author_name: 'Sneha Roy',
+      summary: 'How to combine software development with financial modeling and enterprise ERP systems.',
+      steps: ['Design ER Diagrams for Enterprise', 'Manage Jira Agile Sprints', 'Financial Tech Integration']
+    },
+    {
+      id: 'it-1',
+      title: 'Full Stack Web Architecture & Cloud DevOps',
+      category: 'IT',
+      author_name: 'Aditya Kumar',
+      summary: 'Building RESTful APIs with Node.js, Express, Docker containers, and AWS S3 storage.',
+      steps: ['Create Modular Express Routes', 'Containerize with Docker', 'Deploy to Cloud Hosting']
+    },
+    {
+      id: 'ece-1',
+      title: 'VLSI Design & Digital Signal Processing',
+      category: 'ECE',
+      author_name: 'Ananya Reddy',
+      summary: 'Verilog HDL coding tips, MATLAB signal filters, and microcontroller circuit design.',
+      steps: ['Write Verilog Testbenches', 'Design Butterworth Lowpass Filters', 'Simulate in Modelsim']
+    },
+    {
+      id: 'eee-1',
+      title: 'Power Systems & Electrical Machines Guide',
+      category: 'EEE',
+      author_name: 'Karthik Nair',
+      summary: 'Detailed lab notes on transformers, induction motors, power grid stability, and MATLAB Simulink.',
+      steps: ['Understand Transformer Equivalent Circuits', 'Simulate Power Factor Correction', 'Calculate Motor Efficiency']
+    },
+    {
+      id: 'mech-1',
+      title: 'Thermodynamics & AutoCAD Engineering Drawing',
+      category: 'Mechanical',
+      author_name: 'Rohan Gupta',
+      summary: 'Carnot cycle equations, 3D modeling in SolidWorks, and IC engine test procedures.',
+      steps: ['Learn Isometric Projections in AutoCAD', 'Calculate Enthalpy & Entropy', 'Perform Stress Analysis']
+    },
+    {
+      id: 'civil-1',
+      title: 'Structural Analysis & Concrete Technology',
+      category: 'Civil',
+      author_name: 'Meera Menon',
+      summary: 'Shear force & bending moment diagrams, surveying with Total Station, and mix design.',
+      steps: ['Draw SFD and BMD for Beams', 'Conduct Slump Cone Test for Concrete', 'Plan Leveling in Total Station']
+    },
+    {
+      id: 'chem-1',
+      title: 'Chemical Reaction Engineering & Heat Transfer',
+      category: 'Chemical',
+      author_name: 'Arjun Das',
+      summary: 'Design of CSTR and PFR reactors, distillation column mass transfer, and thermodynamics.',
+      steps: ['Balance Heat Exchanger Equations', 'Calculate Reactor Residence Time', 'Execute Lab Titration']
+    },
+    {
+      id: 'other-1',
+      title: 'Campus Placement Prep & Resume Blueprint',
+      category: 'Others',
+      author_name: 'guidea2z Team',
+      summary: 'A to Z blueprint on aptitude tests, technical interview rounds, and building an ATS-proof resume.',
+      steps: ['Format Clean Single-Page Resume', 'Solve Quantitative Aptitude Daily', 'Ace HR Behavioral Questions']
+    }
+  ];
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Sync User Avatar Header from Local Storage
+    loadHeaderAvatar();
+
+    // 2. Read ?q= and ?dept= URL search parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const preQuery = urlParams.get('q');
+    const preDept = urlParams.get('dept');
+
+    const searchInput = document.getElementById('browse-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+
+    if (preQuery && searchInput) {
+      searchInput.value = preQuery;
+      clearBtn?.classList.remove('hidden');
+    }
+
+    if (preDept) {
+      activeDepartment = preDept;
+    }
+
+    // 3. Search input listener
+    searchInput?.addEventListener('input', (e) => {
+      const val = e.target.value;
+      if (val.length > 0) {
+        clearBtn?.classList.remove('hidden');
+      } else {
+        clearBtn?.classList.add('hidden');
+      }
+      filterAndRenderGuides();
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      clearBtn.classList.add('hidden');
+      filterAndRenderGuides();
+    });
+
+    // 4. Fetch guides from Supabase / Seed Cache
+    await loadDepartmentGuides();
+  });
+
+  function loadHeaderAvatar() {
+    try {
+      const savedProfile = localStorage.getItem('guidea2z_profile');
+      const savedAvatar = localStorage.getItem('guidea2z_avatar');
+      const avatarImg = document.getElementById('header-avatar-img');
+      const avatarInitial = document.getElementById('header-avatar-initial');
+
+      if (savedAvatar && avatarImg) {
+        avatarImg.src = savedAvatar;
+        avatarImg.classList.remove('hidden');
+        if (avatarInitial) avatarInitial.classList.add('hidden');
+      } else if (savedProfile) {
+        const parsed = JSON.parse(savedProfile);
+        if (parsed.name && avatarInitial) {
+          avatarInitial.textContent = parsed.name.charAt(0).toUpperCase();
+        }
+      }
+    } catch(e) {}
+  }
+
+  async function filterDepartment(dept) {
+    activeDepartment = dept;
+    updateActiveDeptUI(dept);
+    filterAndRenderGuides();
+  }
+
+  function updateActiveDeptUI(dept) {
+    const filterHeader = document.getElementById('filter-header');
+    if (filterHeader) {
+      filterHeader.textContent = dept === 'All' ? 'All Guides' : `Guides in ${dept}`;
+    }
+
+    document.querySelectorAll('.dept-btn').forEach(btn => {
+      const bDept = btn.getAttribute('data-dept');
+      if (dept !== 'All' && bDept && bDept.toLowerCase() === dept.toLowerCase()) {
+        btn.classList.add('dept-active');
+      } else {
+        btn.classList.remove('dept-active');
+      }
+    });
+  }
+
+  async function loadDepartmentGuides() {
+    try {
+      if (window.Guidea2zSupabase) {
+        const guides = await window.Guidea2zSupabase.db.fetchGuides(null);
+        if (guides && guides.length > 0) {
+          // Merge Supabase guides with fallback guides
+          const existingIds = new Set(guides.map(g => String(g.id)));
+          const uniqueFallbacks = fallbackGuides.filter(f => !existingIds.has(String(f.id)));
+          allGuidesCache = [...guides, ...uniqueFallbacks];
+        } else {
+          allGuidesCache = fallbackGuides;
+        }
+      } else {
+        allGuidesCache = fallbackGuides;
+      }
+    } catch (err) {
+      console.warn('Error loading guides from DB:', err);
+      allGuidesCache = fallbackGuides;
+    }
+
+    updateActiveDeptUI(activeDepartment);
+    filterAndRenderGuides();
+  }
+
+  function filterAndRenderGuides() {
+    const container = document.getElementById('category-guides-container');
+    const pill = document.getElementById('guides-count-pill');
+    if (!container) return;
+
+    const query = document.getElementById('browse-search-input')?.value?.toLowerCase()?.trim() || '';
+
+    let filtered = allGuidesCache.filter(guide => {
+      // Department matching
+      let matchesDept = true;
+      if (activeDepartment !== 'All') {
+        const cat = (guide.category || '').toLowerCase();
+        const target = activeDepartment.toLowerCase();
+        matchesDept = cat === target || cat.includes(target) || target.includes(cat);
+      }
+
+      // Keyword query matching
+      let matchesQuery = true;
+      if (query) {
+        const titleMatch = (guide.title || '').toLowerCase().includes(query);
+        const summaryMatch = (guide.summary || '').toLowerCase().includes(query);
+        const catMatch = (guide.category || '').toLowerCase().includes(query);
+        const authorMatch = (guide.author_name || '').toLowerCase().includes(query);
+        matchesQuery = titleMatch || summaryMatch || catMatch || authorMatch;
+      }
+
+      return matchesDept && matchesQuery;
+    });
+
+    if (pill) {
+      pill.textContent = `${filtered.length} ${filtered.length === 1 ? 'Guide' : 'Guides'}`;
+    }
+
+    if (filtered.length > 0) {
+      container.innerHTML = filtered.map(guide => {
+        const author = guide.author_name || 'Community Member';
+        const category = guide.category || 'General';
+        const stepsCount = Array.isArray(guide.steps) ? guide.steps.length : 1;
+
+        return `
+          <article class="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between group relative">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold">
+                  <span class="material-symbols-outlined text-xs">tag</span>
+                  ${escapeHtml(category)}
+                </span>
+                <span class="text-xs text-outline font-medium flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">format_list_bulleted</span>
+                  ${stepsCount} steps
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug mb-2">
+                <a href="../guide_detail_new_theme/code.html?id=${guide.id}">${escapeHtml(guide.title)}</a>
+              </h3>
+
+              <p class="text-sm text-on-surface-variant line-clamp-3 leading-relaxed mb-4">
+                ${escapeHtml(guide.summary || '')}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs uppercase">
+                  ${escapeHtml(author.charAt(0))}
+                </div>
+                <span class="text-xs font-medium text-outline">${escapeHtml(author)}</span>
+              </div>
+
+              <a href="../guide_detail_new_theme/code.html?id=${guide.id}" class="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-surface-tint active:scale-95 shadow-sm transition-all">
+                Read Guide
+                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    } else {
+      renderEmptyState(container, query);
+    }
+  }
+
+  function renderEmptyState(container, query = '') {
+    const isFiltered = query.length > 0 || activeDepartment !== 'All';
+    const deptStr = activeDepartment !== 'All' ? `in ${activeDepartment}` : '';
+    const queryStr = query ? `matching "${query}"` : '';
+
+    container.innerHTML = `
+      <div class="col-span-full text-center py-16 px-4 bg-surface-container-lowest rounded-3xl border border-outline-variant/40 shadow-sm flex flex-col items-center justify-center gap-3">
+        <div class="w-16 h-16 rounded-full bg-surface-container-low text-primary flex items-center justify-center mb-1 shadow-inner">
+          <span class="material-symbols-outlined text-3xl">search_off</span>
+        </div>
+        <h3 class="text-xl font-bold text-on-surface">No Guides Found ${deptStr} ${queryStr}</h3>
+        <p class="text-sm text-on-surface-variant max-w-md">
+          ${isFiltered ? 'Try clearing your search filters or select a different department.' : 'Be the first to share your engineering notes and post a study guide!'}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-2">
+          ${isFiltered ? `
+            <button onclick="clearAllFilters()" class="px-5 py-2.5 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-bold rounded-full transition-all">
+              Clear Search &amp; Show All
+            </button>
+          ` : `
+            <a href="../post_guide_new_theme/code.html" class="px-6 py-3 bg-primary hover:bg-surface-tint text-on-primary font-bold text-xs rounded-full shadow-md transition-all inline-flex items-center gap-2">
+              <span class="material-symbols-outlined text-base">add_circle</span>
+              Post a Guide
+            </a>
+          `}
+        </div>
+      </div>
+    `;
+  }
+
+  function clearAllFilters() {
+    const input = document.getElementById('browse-search-input');
+    if (input) input.value = '';
+    document.getElementById('clear-search-btn')?.classList.add('hidden');
+    filterDepartment('All');
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+</script>
+</body>
+</html>

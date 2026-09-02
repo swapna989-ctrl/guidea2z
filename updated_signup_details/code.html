@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/theme.css">
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabaseClient.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#55433e",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#382e2c",
+                    "on-tertiary-fixed": "#0a1d29",
+                    "surface": "#fff8f6",
+                    "on-tertiary-fixed-variant": "#374956",
+                    "on-tertiary-container": "#2c3e4b",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#221a17",
+                    "outline": "#88726d",
+                    "secondary-fixed": "#c6ebd6",
+                    "secondary": "#446555",
+                    "background": "#fff8f6",
+                    "inverse-on-surface": "#ffede9",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#ffb4a2",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#dbc1bb",
+                    "on-secondary-fixed": "#002115",
+                    "surface-container-highest": "#f0dfdb",
+                    "secondary-fixed-dim": "#aacfbb",
+                    "on-secondary-container": "#486a59",
+                    "surface-variant": "#f0dfdb",
+                    "surface-container-low": "#fff1ed",
+                    "on-primary-container": "#6c2412",
+                    "on-secondary-fixed-variant": "#2c4d3e",
+                    "tertiary-container": "#96a9b8",
+                    "on-primary-fixed-variant": "#7a2f1b",
+                    "surface-tint": "#994530",
+                    "tertiary-fixed-dim": "#b6c9d9",
+                    "surface-bright": "#fff8f6",
+                    "tertiary": "#4e616e",
+                    "surface-dim": "#e7d6d2",
+                    "on-background": "#221a17",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d2e5f5",
+                    "primary-container": "#f28b71",
+                    "secondary-container": "#c3e8d4",
+                    "on-primary-fixed": "#3c0700",
+                    "primary": "#994530",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#ffdad2",
+                    "surface-container-high": "#f6e4e0",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#fceae6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "lg": "48px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "xl": "80px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "display-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-md": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(59, 77, 90, 0.08);
+        }
+
+        /* Custom radio button styling for chips */
+        .chip-radio:checked + label {
+            background-color: var(--tw-colors-primary-container, #f28b71);
+            color: var(--tw-colors-on-primary-container, #6c2412);
+            border-color: var(--tw-colors-primary, #994530);
+        }
+        
+        .chip-radio:checked + label .material-symbols-outlined {
+             font-variation-settings: 'FILL' 1;
+        }
+
+        .dept-radio:checked + label {
+             border-color: var(--tw-colors-primary, #994530);
+             background-color: var(--tw-colors-surface-container-low, #fff1ed);
+             box-shadow: 0 0 0 2px var(--tw-colors-primary, #994530);
+        }
+
+        html.dark .dept-radio:checked + label {
+             background-color: #3b170e !important;
+             border-color: #ff8e75 !important;
+             box-shadow: 0 0 0 2px #ff8e75 !important;
+        }
+
+        html.dark .chip-radio:checked + label {
+             background-color: #4b1a10 !important;
+             color: #ffdad2 !important;
+             border-color: #ff8e75 !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased overflow-x-hidden">
+<!-- Floating Theme Toggle -->
+<div class="fixed top-4 right-4 z-50">
+  <button type="button" class="theme-toggle-btn w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+    <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+  </button>
+</div>
+<!-- Suppressed TopAppBar and BottomNavBar as this is a transactional/onboarding flow -->
+<main class="w-full max-w-screen-md mx-auto px-margin-mobile md:px-margin-desktop py-xl flex flex-col items-center justify-center min-h-screen">
+<header class="text-center mb-xl w-full">
+<h1 class="font-display-lg text-display-lg text-primary mb-md md:hidden font-headline-lg-mobile text-headline-lg-mobile">Tell us about<br/>your studies</h1>
+<h1 class="font-display-lg text-display-lg text-primary mb-md hidden md:block">Tell us about your studies</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto">This helps us tailor your guidea2z experience with relevant campus resources and study groups.</p>
+</header>
+<form class="w-full max-w-2xl bg-surface-container-lowest rounded-xl p-md md:p-lg card-shadow mb-xl">
+<!-- Department Selection -->
+<section class="mb-lg">
+<div class="flex items-center gap-xs mb-md">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">school</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Select your Department</h2>
+</div>
+<div class="flex overflow-x-auto gap-sm pb-md -mx-md px-md scrollbar-hide"><!-- Dept Card: CSE -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-cse" name="department" type="radio" value="cse"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-cse">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">computer</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">CSE</span>
+</label>
+</div>
+<!-- Dept Card: CSM -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-csm" name="department" type="radio" value="csm"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-csm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">memory</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">CSM</span>
+</label>
+</div>
+<!-- Dept Card: CSD -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-csd" name="department" type="radio" value="csd"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-csd">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">terminal</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">CSD</span>
+</label>
+</div>
+<!-- Dept Card: CSC -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-csc" name="department" type="radio" value="csc"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-csc">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">code</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">CSC</span>
+</label>
+</div>
+<!-- Dept Card: CSBS -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-csbs" name="department" type="radio" value="csbs"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-csbs">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">business_center</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">CSBS</span>
+</label>
+</div>
+<!-- Dept Card: IT -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-it" name="department" type="radio" value="it"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-it">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">lan</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">IT</span>
+</label>
+</div>
+<!-- Dept Card: ECE -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-ece" name="department" type="radio" value="ece"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-ece">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">settings_input_component</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">ECE</span>
+</label>
+</div>
+<!-- Dept Card: EEE -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-eee" name="department" type="radio" value="eee"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-eee">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">bolt</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">EEE</span>
+</label>
+</div>
+<!-- Dept Card: Civil -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-civil" name="department" type="radio" value="civil"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-civil">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">architecture</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Civil</span>
+</label>
+</div>
+<!-- Dept Card: Mechanical -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-mech" name="department" type="radio" value="mech"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-mech">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">engineering</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Mechanical</span>
+</label>
+</div>
+<!-- Dept Card: Chemical -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-chem" name="department" type="radio" value="chem"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-chem">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">science</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Chemical</span>
+</label>
+</div>
+<!-- Dept Card: Others -->
+<div class="relative">
+<input class="dept-radio peer sr-only" id="dept-other" name="department" type="radio" value="other"/>
+<label class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-high transition-colors text-center min-w-[120px] h-[120px] bg-surface-container-lowest" for="dept-other">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-2xl">more_horiz</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Others</span>
+</label>
+</div></div>
+
+<!-- Custom Branch Input Container (Appears when 'Others' is selected) -->
+<div id="custom-branch-container" class="hidden mt-md pt-sm border-t border-outline-variant/20">
+<label for="custom-branch-input" class="block font-label-md text-label-md text-on-surface mb-xs font-semibold">Enter your Branch / Department Name:</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-tertiary">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<input id="custom-branch-input" type="text" placeholder="e.g. Biomedical, Aerospace, Mechatronics, AI & DS..." class="block w-full pl-10 pr-4 py-3 border border-outline-variant rounded-full bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md text-on-background transition-all shadow-sm" />
+</div>
+</div>
+</section>
+<!-- Year Selection -->
+<section class="mb-lg">
+<div class="flex items-center gap-xs mb-md">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">calendar_today</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">What year are you in?</h2>
+</div>
+<div class="flex flex-wrap gap-sm">
+<!-- Chip 1 -->
+<div class="relative">
+<input class="chip-radio sr-only" id="year-1" name="year" type="radio" value="1"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-1">
+                            1st Year
+                        </label>
+</div>
+<!-- Chip 2 -->
+<div class="relative">
+<input class="chip-radio sr-only" id="year-2" name="year" type="radio" value="2"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-2">
+                            2nd Year
+                        </label>
+</div>
+<!-- Chip 3 -->
+<div class="relative">
+<input class="chip-radio sr-only" id="year-3" name="year" type="radio" value="3"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-3">
+                            3rd Year
+                        </label>
+</div>
+<!-- Chip 4 -->
+<div class="relative">
+<input class="chip-radio sr-only" id="year-4" name="year" type="radio" value="4"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-4">
+                            4th Year
+                        </label>
+</div><div class="relative">
+<input class="chip-radio sr-only" id="year-5" name="year" type="radio" value="5"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-5">
+                            Integrated 5-Year
+                        </label>
+</div>
+<!-- Chip 5 -->
+<div class="relative">
+<input class="chip-radio sr-only" id="year-grad" name="year" type="radio" value="grad"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-grad">
+                            Post-Grad
+                        </label>
+</div><div class="relative">
+<input class="chip-radio sr-only" id="year-alumni" name="year" type="radio" value="alumni"/>
+<label class="inline-flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/30 bg-surface-variant/30 text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors font-label-md text-label-md" for="year-alumni">
+                            Alumni
+                        </label>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-md border-t border-outline-variant/20 mt-xl">
+<button class="px-md py-sm rounded-full font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors" type="button" onclick="window.history.back()">
+                    Back
+                </button>
+<button class="px-lg py-sm rounded-full bg-primary text-on-primary font-label-md text-label-md hover:bg-surface-tint active:scale-95 transition-all shadow-md flex items-center gap-xs" type="submit">
+                    Continue
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+<script>
+        // Toggle Custom Branch text field when 'Others' department is selected
+        const deptRadios = document.querySelectorAll('input[name="department"]');
+        const customBranchContainer = document.getElementById('custom-branch-container');
+        const customBranchInput = document.getElementById('custom-branch-input');
+
+        deptRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'other') {
+                    customBranchContainer.classList.remove('hidden');
+                    customBranchInput.focus();
+                } else {
+                    customBranchContainer.classList.add('hidden');
+                }
+            });
+        });
+
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Saving...';
+            btn.disabled = true;
+
+            try {
+                let selectedDept = document.querySelector('input[name="department"]:checked')?.value || 'General';
+                if (selectedDept === 'other') {
+                    const customVal = customBranchInput?.value?.trim();
+                    selectedDept = customVal ? customVal : 'Other';
+                }
+                
+                const selectedYear = document.querySelector('input[name="year"]:checked')?.value || 'Student';
+
+                if (window.Guidea2zSupabase) {
+                    const client = window.Guidea2zSupabase.getSupabase();
+                    const user = await window.Guidea2zSupabase.auth.getCurrentUser();
+                    
+                    if (client && user) {
+                        // FIX: Write to correct dedicated columns (not role)
+                        await client.from('profiles').upsert({
+                            id: user.id,
+                            email: user.email,
+                            department: selectedDept,
+                            year: selectedYear,
+                            updated_at: new Date().toISOString()
+                        });
+
+                        // Also save to localStorage so home page reads instantly
+                        const rawName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Student';
+                        const localProf = {
+                            name: rawName,
+                            email: user.email,
+                            department: selectedDept,
+                            year: selectedYear
+                        };
+                        localStorage.setItem('guidea2z_profile', JSON.stringify(localProf));
+                    }
+                }
+                btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Profile Saved!';
+                setTimeout(() => {
+                    window.location.href = '../home_feed_new_theme/code.html';
+                }, 1000);
+            } catch (err) {
+                console.warn('Profile save note:', err.message);
+                window.location.href = '../home_feed_new_theme/code.html';
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body></html>

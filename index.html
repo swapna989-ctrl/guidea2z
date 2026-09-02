@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>guidea2z - Local App Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/theme.css">
+  <script src="./js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#994530',
+            'primary-container': '#f28b71',
+            secondary: '#446555',
+            'secondary-container': '#c3e8d4',
+            surface: '#fff8f6',
+            'surface-container': '#fceae6',
+            'surface-container-high': '#f6e4e0',
+            'on-surface': '#221a17',
+            'on-surface-variant': '#55433e',
+            outline: '#88726d'
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <style>
+    body {
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .active-tab {
+      background-color: #994530;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .active-tab .material-symbols-outlined {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-[#fff8f6] text-[#221a17] min-h-screen flex flex-col overflow-hidden">
+
+  <!-- Top Header Navigation Bar -->
+  <header class="bg-white border-b border-[#f0dfdb] px-6 py-3 flex items-center justify-between z-20 shadow-sm">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-[#994530] text-white flex items-center justify-center font-bold text-xl shadow-md">
+        g
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-extrabold text-[#994530] tracking-tight">guidea2z</h1>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Local Server Active
+          </span>
+          <span id="supabase-status-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 cursor-pointer" onclick="openSupabaseModal()">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            Supabase: Config Required
+          </span>
+        </div>
+        <p class="text-xs text-[#88726d]">Interactive Design Prototype & Application Suite</p>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="flex items-center gap-3">
+      <button onclick="openSupabaseModal()" class="px-3 py-2 bg-[#994530] hover:bg-[#7a2f1b] text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-sm">database</span>
+        Supabase API Settings
+      </button>
+
+      <div class="bg-[#fceae6] p-1 rounded-xl flex items-center gap-1 border border-[#dbc1bb]">
+        <button id="view-desktop-btn" onclick="setDevice('desktop')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all bg-white text-[#994530] shadow-sm">
+          <span class="material-symbols-outlined text-sm">desktop_windows</span>
+          Desktop
+        </button>
+        <button id="view-mobile-btn" onclick="setDevice('mobile')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-[#55433e] hover:bg-white/50">
+          <span class="material-symbols-outlined text-sm">smartphone</span>
+          Mobile (375px)
+        </button>
+      </div>
+
+      <!-- Theme Toggle Button -->
+      <button type="button" class="theme-toggle-btn px-3 py-2 bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface-variant hover:text-primary text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-all shadow-sm" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-sm theme-toggle-icon">dark_mode</span>
+        <span class="theme-label-text">Dark Mode</span>
+      </button>
+
+      <a id="direct-link" href="./home_feed_new_theme/code.html" target="_blank" class="px-3 py-2 bg-[#446555] hover:bg-[#2c4d3e] text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-sm">open_in_new</span>
+        Open Screen Direct
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-72 bg-white border-r border-[#f0dfdb] flex flex-col justify-between overflow-y-auto p-4 z-10 shrink-0">
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-xs font-bold text-[#88726d] uppercase tracking-wider px-3 mb-2">Main Screens</h2>
+          <nav class="space-y-1" id="screen-nav">
+            <button onclick="loadScreen('./home_feed_new_theme/code.html', this)" class="screen-btn active-tab w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#994530]">home</span>
+              <div class="flex-1">
+                <div class="font-semibold">Home Feed</div>
+                <div class="text-[11px] opacity-75 font-mono">/home_feed_new_theme</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./browse_new_theme/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#446555]">explore</span>
+              <div class="flex-1">
+                <div class="font-semibold">Browse Departments</div>
+                <div class="text-[11px] opacity-75 font-mono">/browse_new_theme</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./guide_detail_new_theme/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#4e616e]">auto_stories</span>
+              <div class="flex-1">
+                <div class="font-semibold">Guide Detail View</div>
+                <div class="text-[11px] opacity-75 font-mono">/guide_detail_new_theme</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./post_guide_new_theme/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#994530]">add_circle</span>
+              <div class="flex-1">
+                <div class="font-semibold">Post New Guide</div>
+                <div class="text-[11px] opacity-75 font-mono">/post_guide_new_theme</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./saved_guides/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#446555]">bookmark</span>
+              <div class="flex-1">
+                <div class="font-semibold">Saved Guides</div>
+                <div class="text-[11px] opacity-75 font-mono">/saved_guides</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./account_settings/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#4e616e]">settings</span>
+              <div class="flex-1">
+                <div class="font-semibold">Account Settings</div>
+                <div class="text-[11px] opacity-75 font-mono">/account_settings</div>
+              </div>
+            </button>
+          </nav>
+        </div>
+
+        <div>
+          <h2 class="text-xs font-bold text-[#88726d] uppercase tracking-wider px-3 mb-2">Authentication Screens</h2>
+          <nav class="space-y-1">
+            <button onclick="loadScreen('./fun_login_new_theme/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#994530]">login</span>
+              <div class="flex-1">
+                <div class="font-semibold">Fun Login</div>
+                <div class="text-[11px] opacity-75 font-mono">/fun_login_new_theme</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./sign_up/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#446555]">person_add</span>
+              <div class="flex-1">
+                <div class="font-semibold">Sign Up</div>
+                <div class="text-[11px] opacity-75 font-mono">/sign_up</div>
+              </div>
+            </button>
+
+            <button onclick="loadScreen('./updated_signup_details/code.html', this)" class="screen-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 text-[#55433e] transition-all hover:bg-[#fceae6]">
+              <span class="material-symbols-outlined text-xl text-[#4e616e]">badge</span>
+              <div class="flex-1">
+                <div class="font-semibold">Updated Signup Details</div>
+                <div class="text-[11px] opacity-75 font-mono">/updated_signup_details</div>
+              </div>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Footer system info -->
+      <div class="pt-4 border-t border-[#f0dfdb] text-xs text-[#88726d] flex flex-col gap-1">
+        <div class="flex items-center justify-between font-semibold">
+          <span>Project Root</span>
+          <span class="font-mono text-[10px] bg-[#fceae6] px-1.5 py-0.5 rounded text-[#994530]">_guidea2z_</span>
+        </div>
+        <p class="text-[11px] leading-tight">Serving 9 responsive HTML screens & design systems.</p>
+      </div>
+    </aside>
+
+    <!-- Main Viewport Area -->
+    <main class="flex-1 bg-[#f0dfdb]/40 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      
+      <!-- Frame Container -->
+      <div id="frame-wrapper" class="w-full h-full max-w-full max-h-full transition-all duration-300 flex items-center justify-center">
+        <iframe 
+          id="app-iframe" 
+          src="./home_feed_new_theme/code.html" 
+          class="w-full h-full bg-white rounded-2xl shadow-xl border border-[#dbc1bb] transition-all duration-300"
+          title="guidea2z Screen Preview">
+        </iframe>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Supabase API Settings Modal -->
+  <div id="supabase-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-[#dbc1bb] space-y-4">
+      <div class="flex items-center justify-between border-b border-[#f0dfdb] pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-[#994530] text-white flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined text-sm">database</span>
+          </div>
+          <h3 class="font-extrabold text-lg text-[#994530]">Supabase API Configuration</h3>
+        </div>
+        <button onclick="closeSupabaseModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <p class="text-xs text-[#55433e] leading-relaxed">
+        Connect your Supabase project to enable live Authentication and Community Guide data persistence across all screens. You can find these in your <a href="https://supabase.com/dashboard" target="_blank" class="text-[#994530] font-semibold underline">Supabase Dashboard</a> (Project Settings -> API).
+      </p>
+
+      <form id="supabase-config-form" onsubmit="saveSupabaseSettings(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-[#88726d] uppercase mb-1" for="modal-supabase-url">Project URL</label>
+          <input type="text" id="modal-supabase-url" value="https://djtgwdqyuuxhjhcdsyso.supabase.co" placeholder="https://djtgwdqyuuxhjhcdsyso.supabase.co" class="w-full px-3 py-2.5 text-xs bg-[#fff8f6] border border-[#dbc1bb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#994530] font-mono text-[#221a17]" required />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-[#88726d] uppercase mb-1" for="modal-supabase-key">Anon / Public Key</label>
+          <input type="text" id="modal-supabase-key" value="sb_publishable_1q_Et-whdwI7wwmSVkx84g_luiROEvA" placeholder="sb_publishable_..." class="w-full px-3 py-2.5 text-xs bg-[#fff8f6] border border-[#dbc1bb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#994530] font-mono text-[#221a17]" required />
+        </div>
+
+        <div id="modal-msg" class="hidden text-xs p-2.5 rounded-xl font-semibold"></div>
+
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#f0dfdb]">
+          <button type="button" onclick="closeSupabaseModal()" class="px-4 py-2 text-xs font-semibold text-[#55433e] hover:bg-[#fceae6] rounded-xl transition-all">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 bg-[#994530] hover:bg-[#7a2f1b] text-white text-xs font-bold rounded-xl shadow-md transition-all">
+            Save & Connect
+          </button>
+        </div>
+      </form>
+
+      <div class="bg-[#fceae6]/60 p-3 rounded-2xl border border-[#dbc1bb]/40 text-[11px] text-[#55433e] space-y-1">
+        <p class="font-bold text-[#994530]">SQL Schema Ready:</p>
+        <p>A ready-to-run database schema script is available at <code class="bg-white px-1 py-0.5 rounded font-mono text-[10px]">supabase/schema.sql</code> to create the tables (<code class="font-mono text-[10px]">profiles</code>, <code class="font-mono text-[10px]">guides</code>, <code class="font-mono text-[10px]">saved_guides</code>).</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function loadScreen(url, btnElement) {
+      const iframe = document.getElementById('app-iframe');
+      const directLink = document.getElementById('direct-link');
+      
+      iframe.src = url;
+      directLink.href = url;
+
+      // Sync theme with iframe once loaded
+      iframe.onload = () => {
+        try {
+          const currentTheme = window.Guidea2zTheme ? window.Guidea2zTheme.get() : 'light';
+          iframe.contentWindow.postMessage({ type: 'guidea2z_set_theme', theme: currentTheme }, '*');
+        } catch (e) {}
+      };
+
+      // Update Active Button styling
+      document.querySelectorAll('.screen-btn').forEach(btn => {
+        btn.classList.remove('active-tab');
+        btn.classList.add('text-[#55433e]');
+      });
+      
+      btnElement.classList.add('active-tab');
+      btnElement.classList.remove('text-[#55433e]');
+    }
+
+    function setDevice(type) {
+      const wrapper = document.getElementById('frame-wrapper');
+      const iframe = document.getElementById('app-iframe');
+      const desktopBtn = document.getElementById('view-desktop-btn');
+      const mobileBtn = document.getElementById('view-mobile-btn');
+
+      if (type === 'mobile') {
+        wrapper.className = "w-[395px] h-[820px] max-h-full transition-all duration-300 flex items-center justify-center p-2 bg-slate-900 rounded-[44px] shadow-2xl border-4 border-slate-700 relative";
+        iframe.className = "w-full h-full bg-white rounded-[36px] overflow-hidden";
+        
+        mobileBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all bg-white text-[#994530] shadow-sm";
+        desktopBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-[#55433e] hover:bg-white/50";
+      } else {
+        wrapper.className = "w-full h-full max-w-full max-h-full transition-all duration-300 flex items-center justify-center";
+        iframe.className = "w-full h-full bg-white rounded-2xl shadow-xl border border-[#dbc1bb] transition-all duration-300";
+        
+        desktopBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all bg-white text-[#994530] shadow-sm";
+        mobileBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-[#55433e] hover:bg-white/50";
+      }
+    }
+
+    function openSupabaseModal() {
+      const { url, key } = window.Guidea2zSupabase ? window.Guidea2zSupabase.getSupabaseCredentials() : { url: '', key: '' };
+      document.getElementById('modal-supabase-url').value = url || '';
+      document.getElementById('modal-supabase-key').value = key || '';
+      document.getElementById('modal-msg').className = 'hidden text-xs p-2.5 rounded-xl font-semibold';
+      document.getElementById('supabase-modal').classList.remove('hidden');
+    }
+
+    function closeSupabaseModal() {
+      document.getElementById('supabase-modal').classList.add('hidden');
+    }
+
+    function updateSupabaseStatusBadge() {
+      const badge = document.getElementById('supabase-status-badge');
+      const { url, key } = window.Guidea2zSupabase ? window.Guidea2zSupabase.getSupabaseCredentials() : { url: '', key: '' };
+      
+      if (url && key) {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-pointer";
+        badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Supabase: Connected';
+      } else {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 cursor-pointer";
+        badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-500"></span>Supabase: Config Required';
+      }
+    }
+
+    function saveSupabaseSettings(e) {
+      e.preventDefault();
+      const url = document.getElementById('modal-supabase-url').value;
+      const key = document.getElementById('modal-supabase-key').value;
+      const msg = document.getElementById('modal-msg');
+
+      try {
+        if (window.Guidea2zSupabase) {
+          window.Guidea2zSupabase.setSupabaseCredentials(url, key);
+        }
+        updateSupabaseStatusBadge();
+        msg.className = 'block text-xs p-2.5 rounded-xl font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        msg.textContent = 'Supabase credentials saved successfully!';
+        setTimeout(() => {
+          closeSupabaseModal();
+          // Reload active iframe to pick up new client credentials
+          const iframe = document.getElementById('app-iframe');
+          iframe.src = iframe.src;
+        }, 1000);
+      } catch (err) {
+        msg.className = 'block text-xs p-2.5 rounded-xl font-semibold bg-rose-100 text-rose-800 border border-rose-300';
+        msg.textContent = 'Error saving credentials: ' + err.message;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSupabaseStatusBadge();
+    });
+  </script>
+</body>
+</html>

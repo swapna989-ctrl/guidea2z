@@ -1,0 +1,388 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/theme.css">
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabaseClient.js"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "primary-fixed-dim": "#ffb4a2",
+                "surface": "#fff8f6",
+                "tertiary": "#4e616e",
+                "on-background": "#221a17",
+                "surface-container-high": "#f6e4e0",
+                "on-surface": "#221a17",
+                "secondary-fixed-dim": "#aacfbb",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#c3e8d4",
+                "primary": "#994530",
+                "secondary": "#446555",
+                "error": "#ba1a1a",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#994530",
+                "on-primary-fixed": "#3c0700",
+                "on-secondary-fixed-variant": "#2c4d3e",
+                "tertiary-fixed-dim": "#b6c9d9",
+                "inverse-surface": "#382e2c",
+                "background": "#fff8f6",
+                "inverse-primary": "#ffb4a2",
+                "tertiary-fixed": "#d2e5f5",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#2c3e4b",
+                "on-secondary-fixed": "#002115",
+                "inverse-on-surface": "#ffede9",
+                "on-tertiary-fixed-variant": "#374956",
+                "outline-variant": "#dbc1bb",
+                "surface-container-highest": "#f0dfdb",
+                "surface-bright": "#fff8f6",
+                "primary-container": "#f28b71",
+                "surface-container": "#fceae6",
+                "surface-container-low": "#fff1ed",
+                "on-error-container": "#93000a",
+                "secondary-fixed": "#c6ebd6",
+                "primary-fixed": "#ffdad2",
+                "surface-variant": "#f0dfdb",
+                "outline": "#88726d",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed": "#0a1d29",
+                "surface-dim": "#e7d6d2",
+                "on-primary-fixed-variant": "#7a2f1b",
+                "on-primary-container": "#6c2412",
+                "on-surface-variant": "#55433e",
+                "on-primary": "#ffffff",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#486a59",
+                "tertiary-container": "#96a9b8"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "md": "24px",
+                "base": "8px",
+                "gutter": "24px",
+                "sm": "12px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "xl": "80px",
+                "lg": "48px",
+                "xs": "4px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .pt-safe {
+            padding-top: env(safe-area-inset-top);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md min-h-screen flex flex-col pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 dark:bg-surface-dim/80 shadow-sm border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<a href="../account_settings/code.html" class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant flex-shrink-0 cursor-pointer active:scale-95 duration-200 hover:bg-surface-container-high flex items-center justify-center">
+  <span class="material-symbols-outlined text-primary">person</span>
+</a>
+<a href="../home_feed_new_theme/code.html" class="flex items-center gap-2">
+  <img src="../sign_up/logo.png" class="w-8 h-8 object-contain" alt="guidea2z logo">
+  <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">guidea2z</span>
+</a>
+</div>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../home_feed_new_theme/code.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../browse_new_theme/code.html">Browse</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-2 rounded-lg" href="../saved_guides/code.html">Saved</a>
+<a class="font-label-md text-label-md text-primary bg-surface-container-high px-4 py-2 rounded-lg font-semibold flex items-center gap-2" href="../post_guide_new_theme/code.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                    Post
+                </a>
+</div>
+<!-- Actions: Theme Toggle & Search -->
+<div class="flex items-center gap-1.5">
+  <button type="button" class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" title="Toggle Dark/Light Mode">
+    <span class="material-symbols-outlined text-xl theme-toggle-icon">dark_mode</span>
+  </button>
+  <a href="../browse_new_theme/code.html" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200 text-primary">
+    <span class="material-symbols-outlined">search</span>
+  </a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto w-full mb-12">
+<div class="mb-lg">
+<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-2">Create a New Guide</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Share your knowledge with the community. Keep it clear and simple.</p>
+</div>
+<form id="post-guide-form" class="space-y-md bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm border border-outline-variant/30">
+<!-- Notification message -->
+<div id="post-msg" class="hidden p-3 rounded-xl text-sm font-medium"></div>
+
+<!-- Title -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="guide-title">Guide Title</label>
+<input class="w-full px-4 py-4 md:py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all font-body-lg text-body-lg min-h-[56px] md:min-h-[44px]" id="guide-title" name="guide-title" placeholder="e.g., How to Ace Data Structures & Algorithms Lab" required="" type="text">
+</div>
+<!-- Department / Category -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="guide-category">Department / Branch</label>
+<div class="relative">
+<select class="w-full px-4 py-4 md:py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all font-body-lg text-body-lg appearance-none min-h-[56px] md:min-h-[44px]" id="guide-category" name="guide-category" required="">
+<option disabled="" selected="" value="">Select a department</option>
+<option value="CSE">CSE (Computer Science & Engineering)</option>
+<option value="CSM">CSM (AI & Machine Learning)</option>
+<option value="CSD">CSD (Data Science)</option>
+<option value="CSC">CSC (Cyber Security)</option>
+<option value="CSBS">CSBS (Computer Science & Business Systems)</option>
+<option value="IT">IT (Information Technology)</option>
+<option value="ECE">ECE (Electronics & Communication)</option>
+<option value="EEE">EEE (Electrical & Electronics)</option>
+<option value="Mechanical">Mechanical Engineering</option>
+<option value="Civil">Civil Engineering</option>
+<option value="Chemical">Chemical Engineering</option>
+<option value="Others">Others (General / Campus Life)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Image Upload -->
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface">Cover Image (Optional)</span>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group min-h-[160px]">
+<span class="material-symbols-outlined text-4xl text-primary mb-2 group-hover:scale-110 transition-transform">add_photo_alternate</span>
+<p class="font-body-md text-body-md text-on-surface-variant font-medium">Tap to upload an image</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">JPEG, PNG up to 5MB</p>
+<input accept="image/*" class="hidden" type="file">
+</div>
+</div>
+<!-- Content Area -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<label class="font-label-md text-label-md text-on-surface" for="guide-content">Guide Content</label>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed px-2 py-1 rounded">Markdown Supported</span>
+</div>
+<textarea class="w-full px-4 py-4 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all font-body-lg text-body-lg resize-y min-h-[200px]" id="guide-content" name="guide-content" placeholder="Write your guide here... Start with a brief introduction." required="" rows="10"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-sm">
+<button id="publish-btn" class="w-full bg-primary text-on-primary font-headline-md text-headline-md py-4 rounded-xl shadow-md hover:bg-primary-container hover:text-on-primary-container hover:shadow-lg active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 min-h-[64px]" type="submit">
+                    Publish Guide
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe z-50 rounded-t-xl bg-surface dark:bg-surface-dim shadow-[0_-4px_12px_rgba(153,69,48,0.08)]"><a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 p-2" href="../home_feed_new_theme/code.html">
+    <span class="material-symbols-outlined">home</span>
+    <span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 p-2" href="../browse_new_theme/code.html">
+    <span class="material-symbols-outlined">explore</span>
+    <span class="font-label-sm text-label-sm mt-1">Browse</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-fixed text-on-secondary-fixed-variant rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="../post_guide_new_theme/code.html">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+    <span class="font-label-sm text-label-sm mt-1">Post</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 p-2" href="../saved_guides/code.html">
+    <span class="material-symbols-outlined">bookmark</span>
+    <span class="font-label-sm text-label-sm mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:text-secondary dark:hover:text-secondary-fixed-dim active:scale-90 transition-transform duration-150 p-2" href="../account_settings/code.html">
+    <span class="material-symbols-outlined">person</span>
+    <span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a></nav>
+<script>
+        // Check auth status
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (window.Guidea2zSupabase) {
+                try {
+                    const user = await window.Guidea2zSupabase.auth.getCurrentUser();
+                    if (!user) {
+                        const msg = document.getElementById('post-msg');
+                        if (msg) {
+                            msg.className = 'block p-3 bg-amber-50 text-amber-900 border border-amber-200 rounded-xl text-xs font-medium text-center mb-4';
+                            msg.innerHTML = 'Posting as <strong>Community Member</strong>. <a href="../fun_login_new_theme/code.html" class="underline font-bold text-primary">Log in</a> to link guides to your profile.';
+                        }
+                    }
+                } catch (e) {}
+            }
+        });
+
+        // Simple file upload interaction simulation
+        document.querySelector('.border-dashed').addEventListener('click', function() {
+            this.querySelector('input[type="file"]').click();
+        });
+        
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+            if(this.files && this.files[0]) {
+                const reader = new FileReader();
+                const container = this.closest('.border-dashed');
+                reader.onload = function(e) {
+                    container.innerHTML = `
+                        <div class="relative w-full h-full min-h-[160px] rounded-lg overflow-hidden group">
+                            <img src="${e.target.result}" class="w-full h-full object-cover" alt="Uploaded preview">
+                            <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="material-symbols-outlined text-white text-3xl mb-1">refresh</span>
+                                <span class="text-white font-label-md text-label-md">Change Image</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Supabase Publish Guide submit handler
+        document.getElementById('post-guide-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('publish-btn');
+            const msg = document.getElementById('post-msg');
+            const title = document.getElementById('guide-title').value;
+            const category = document.getElementById('guide-category').value;
+            const content = document.getElementById('guide-content').value;
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Publishing to Supabase...</span>';
+            msg.className = 'hidden p-3 rounded-xl text-sm font-medium';
+
+            try {
+                if (!window.Guidea2zSupabase) {
+                    throw new Error('Supabase client library not loaded.');
+                }
+                await window.Guidea2zSupabase.db.createGuide({
+                    title,
+                    category,
+                    summary: content.substring(0, 150) + '...',
+                    steps: [content]
+                });
+
+                msg.className = 'block p-3 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl text-sm font-medium text-center';
+                msg.textContent = 'Guide published successfully to Supabase! Redirecting to Home Feed...';
+                setTimeout(() => {
+                    window.location.href = '../home_feed_new_theme/code.html';
+                }, 1500);
+            } catch (err) {
+                msg.className = 'block p-3 bg-rose-100 text-rose-800 border border-rose-300 rounded-xl text-sm font-medium text-center';
+                msg.textContent = err.message || 'Failed to publish guide. Make sure Supabase API keys are set.';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Publish Guide <span class="material-symbols-outlined" style="font-variation-settings: \'FILL\' 1;">send</span>';
+            }
+        });
+    </script>
+</body></html>
